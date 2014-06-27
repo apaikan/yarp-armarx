@@ -13,17 +13,8 @@ armarx_project("YarpArmarxBridges")
 
 find_package(YARP REQUIRED)
 include_directories(${YARP_INCLUDE_DIRS})
-#link_directories(${YARP_LINK_DIRECTORIES})
 
-
-
-#find_package(IVT QUIET)
-#if (IVT_FOUND)
-#    include_directories(${IVT_INCLUDE_DIRS})
-#    message(STATUS "IVT directory: "${IVT_INCLUDE_DIRS})
-#endif()
-
-add_subdirectory(YARPImageProvider)
+add_subdirectory(components)
 
 #install_project()
 

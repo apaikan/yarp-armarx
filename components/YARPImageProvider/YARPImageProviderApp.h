@@ -15,8 +15,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package    VisionX::Component
- * @author     Kai Welke (kai dot welke at kit dot edu)
- * @date       2011
+ * @author     Ali Paikan ( ali dot paikan at iit dot it )
+ * @date       2014
  * @copyright  http://www.gnu.org/licenses/gpl-2.0.txt
  *             GNU General Public License
  */
@@ -33,12 +33,6 @@ namespace armarx
         { 
             registry->addObject( Component::create<visionx::YARPImageProvider>(properties, "YARPImageProvider", "VisionX" )); 
         };
-
-        virtual void interruptCallback (int signal)        
-        {
-            //TODO: call YARPImageProvider::interrupt() if needed 
-            visionx::VisionXApplication::interruptCallback(signal);
-        }
     };
 };
 

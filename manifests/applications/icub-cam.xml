@@ -1,0 +1,15 @@
+<application>
+    <name>Armarx_iCub_CamViewer</name>
+    <description>A simple application demonstrates how to display YARP/iCub camera images in Armarx framework</description>
+    <version>1.0</version>
+    <authors>
+        <author email="ali.paikan@iit.it">Ali Paikan</author>
+    </authors>
+    <module>
+        <name>ArmarXGuiRun</name>
+        <parameters>--Ice.Default.Locator="IceGrid/Locator:tcp -p 4061 -h localhost" --Ice.ThreadPool.Client.SizeMax=20 --Ice.ThreadPool.Server.SizeMax=20 --Ice.PrintStackTraces=1</parameters>
+        <workdir>/home/SMBAD/paikan/home/armarx/Gui/build/bin</workdir>
+        <node>localhost</node>
+    </module>
+</application>
+

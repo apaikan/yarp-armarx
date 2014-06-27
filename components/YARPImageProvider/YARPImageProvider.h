@@ -15,8 +15,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package    VisionX::Component
- * @author     Kai Welke (kai dot welke at kit dot edu)
- * @date       2011
+ * @author     Ali Paikan ( ali dot paikan at iit dot it )
+ * @date       2014
  * @copyright  http://www.gnu.org/licenses/gpl-2.0.txt
  *             GNU General Public License
  */
@@ -30,10 +30,12 @@
 
 /* VisionX */
 #include <VisionX/core/CapturingImageProvider.h>
-#include <VisionX/tools/FPSCounter.h>
+#include <VisionX/interface/component/Calibration.h>
+//#include <VisionX/tools/FPSCounter.h>
 
 /* IVT */
 #include <Image/ByteImage.h>
+#include <Calibration/StereoCalibration.h>
 
 /* YARP */
 #include <yarp/os/BufferedPort.h>
@@ -49,10 +51,11 @@ namespace visionx
         YARPImageProviderPropertyDefinitions(std::string prefix):
             ComponentPropertyDefinitions(prefix)
         {
-            //defineOptionalProperty<int>("NumberImages", 1, "Number of images").setMax(1);
-            defineOptionalProperty<std::string>("Remote", std::string("/grabber"), "Romote Yarp port to receive the image");
-            defineOptionalProperty<std::string>("Local", std::string("..."), "Local Yarp port");
+            defineOptionalProperty<std::string>("Camera", std::string("left"), "Which camera image should be provide: 'left', 'right', 'both'");
+            defineOptionalProperty<std::string>("RemoteLeft", std::string("/icub/cam/left"), "Romote Yarp port to receive the left image");
+            defineOptionalProperty<std::string>("RemoteRight", std::string("/icub/cam/right"), "Romote Yarp port to receive the right image");
             defineOptionalProperty<std::string>("Carrier", std::string("udp"), "Yarp Connection carrier");
+            defineOptionalProperty<std::string>("CalibrationFile", "", "Camera calibration file, will be made available in the SLICE interface");
         }
     };
 
@@ -115,11 +118,40 @@ namespace visionx
             return "YARPImageProvider";
         }
 
+        
+        /**
+         * Get the signal to interrupt the block--reading yarp port
+         */
+        void onExitComponent();
+
+        /**
+         * Returns the StereoCalibration as provided in configuration
+         *
+         * @return visionx::StereoCalibration
+         */
+        visionx::StereoCalibration getStereoCalibration(const Ice::Current& c = ::Ice::Current());
+
     private:
-        yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb> > m_imgPort;
-        std::string m_strRemotePort;
-        std::string m_strLocalPort;
+        yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb> > m_leftImgPort;
+        yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb> > m_rightImgPort;
+
+        std::string m_strCamera;
+        std::string m_strRightPort;
+        std::string m_strLeftPort;
         std::string m_strCarrier;
+        bool m_bLeftCamUsed;
+        bool m_bRightCamUsed;
+
+        /**
+         * IVT Stereo Calibration object
+         */
+        CStereoCalibration ivtStereoCalibration;
+
+        /**
+         * VisionX StereoCalibration object
+         */
+        StereoCalibration stereoCalibration;
+
     };
 }
 

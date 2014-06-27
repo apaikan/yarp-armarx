@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package    VisionX::application::YARPImageProvider
- * @author     welke ( welke at kit dot edu )
- * @date       2013
- * @copyright  http://www.gnu.org/licenses/gpl.txt
+ * @package    VisionX::Component
+ * @author     Ali Paikan ( ali dot paikan at iit dot it )
+ * @date       2014
+ * @copyright  http://www.gnu.org/licenses/gpl-2.0.txt
  *             GNU General Public License
  */
 
