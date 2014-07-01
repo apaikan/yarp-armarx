@@ -31,6 +31,13 @@
 
 #include <Core/units/KinematicUnit.h>
 
+
+// yarp interfaces
+#include <yarp/dev/IPositionControl.h>
+#include <yarp/dev/IEncoders.h>
+#include <yarp/dev/Drivers.h>
+
+
 namespace armarx
 {
     /**
@@ -45,8 +52,8 @@ namespace armarx
         YarpKinematicUnitPropertyDefinitions(std::string prefix):
             KinematicUnitPropertyDefinitions(prefix)
         {
-            //defineRequiredProperty<std::string>("PropertyName", "Description");
-            //defineOptionalProperty<std::string>("PropertyName", "DefaultValue", "Description");
+            defineRequiredProperty<std::string>("robot", "icub", "Robot name");
+            //defineOptionalProperty<std::string>("device", "remote_controlboard", "");
         }
     };
 
@@ -99,6 +106,12 @@ namespace armarx
         void setJointTorques(const NameValueMap &, const Ice::Current &);
         void setJointAccelerations(const NameValueMap &, const Ice::Current &);
         void setJointDecelerations(const NameValueMap &, const Ice::Current &);
+
+        // yarp related properties 
+    private: 
+        yarp::dev::PolyDriver   driver; 
+        yarp::dev::IEncoders    *encoders;
+        yarp::dev::IPositionControl    *positions;
     };
 }
 
