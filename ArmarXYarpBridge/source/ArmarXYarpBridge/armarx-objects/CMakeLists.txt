@@ -1,0 +1,2 @@
+add_subdirectory(YarpImageProvider)
+add_subdirectory(YarpKinematicUnit)
