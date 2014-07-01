@@ -27,6 +27,10 @@
 
 #include <Core/core/Component.h>
 
+#include <Core/interface/units/KinematicUnitInterface.h>
+
+#include <Core/units/KinematicUnit.h>
+
 namespace armarx
 {
     /**
@@ -35,11 +39,11 @@ namespace armarx
      * @ingroup Components
      */
     class YarpKinematicUnitPropertyDefinitions:
-        public ComponentPropertyDefinitions
+        public KinematicUnitPropertyDefinitions
     {
     public:
         YarpKinematicUnitPropertyDefinitions(std::string prefix):
-            ComponentPropertyDefinitions(prefix)
+            KinematicUnitPropertyDefinitions(prefix)
         {
             //defineRequiredProperty<std::string>("PropertyName", "Description");
             //defineOptionalProperty<std::string>("PropertyName", "DefaultValue", "Description");
@@ -53,7 +57,9 @@ namespace armarx
      * Detailed Description
      */
     class YarpKinematicUnit :
-        virtual public armarx::Component
+        virtual public armarx::Component,
+            virtual public KinematicUnit,
+            virtual public KinematicUnitInterface
     {
     public:
         /**
@@ -65,30 +71,34 @@ namespace armarx
         }
 
     protected:
-        /**
-         * @see armarx::ManagedIceObject::onInitComponent()
-         */
-        virtual void onInitComponent();
-
-        /**
-         * @see armarx::ManagedIceObject::onConnectComponent()
-         */
-        virtual void onConnectComponent();
-
-        /**
-         * @see armarx::ManagedIceObject::onDisconnectComponent()
-         */
-        virtual void onDisconnectComponent();
-
-        /**
-         * @see armarx::ManagedIceObject::onExitComponent()
-         */
-        virtual void onExitComponent();
 
         /**
          * @see PropertyUser::createPropertyDefinitions()
          */
         virtual PropertyDefinitionsPtr createPropertyDefinitions();
+
+        // UnitResourceManagementInterface interface
+    public:
+        void request(const Ice::Current &);
+        void release(const Ice::Current &);
+
+        // UnitExecutionManagementInterface interface
+    public:
+        void init(const Ice::Current &);
+        void start(const Ice::Current &);
+        void stop(const Ice::Current &);
+        UnitExecutionState getExecutionState(const Ice::Current &);
+
+        // KinematicUnitInterface interface
+    public:
+        void requestJoints(const StringSequence &, const Ice::Current &);
+        void releaseJoints(const StringSequence &, const Ice::Current &);
+        void switchControlMode(const NameControlModeMap &, const Ice::Current &);
+        void setJointAngles(const NameValueMap &, const Ice::Current &);
+        void setJointVelocities(const NameValueMap &, const Ice::Current &);
+        void setJointTorques(const NameValueMap &, const Ice::Current &);
+        void setJointAccelerations(const NameValueMap &, const Ice::Current &);
+        void setJointDecelerations(const NameValueMap &, const Ice::Current &);
     };
 }
 

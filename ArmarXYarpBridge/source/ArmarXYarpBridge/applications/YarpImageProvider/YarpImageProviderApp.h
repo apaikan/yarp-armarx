@@ -47,6 +47,7 @@ namespace armarx
                    Ice::PropertiesPtr properties)
         {
             registry->addObject(Component::create<armarx::YarpImageProvider>(properties));
+            //registry->addObject(Component::create<visionx::YARPImageProvider>(properties, "YARPImageProvider", "VisionX"));
         }
     };
 }

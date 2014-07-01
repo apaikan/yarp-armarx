@@ -9,7 +9,18 @@ armarx_component_set_name("YarpKinematicUnit")
 #    include_directories(${MyLib_INCLUDE_DIRS})
 #endif()
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ${YARP_LIBRARIES})
+find_package(Eigen3 QUIET)
+armarx_build_if(Eigen3_FOUND "Eigen3 not available")
+include_directories(${Eigen3_INCLUDE_DIR})
+
+
+armarx_build_if(BUILD "library disabled")
+
+find_package(Simox QUIET)
+armarx_build_if(Simox_FOUND "Simox-VirtualRobot not available")
+include_directories(${Simox_INCLUDE_DIRS})
+
+set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ${YARP_LIBRARIES} ${Simox_LIBRARIES})
 
 set(SOURCES YarpKinematicUnit.cpp)
 set(HEADERS YarpKinematicUnit.h)

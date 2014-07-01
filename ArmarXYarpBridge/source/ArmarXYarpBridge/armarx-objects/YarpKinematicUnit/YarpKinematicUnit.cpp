@@ -56,3 +56,61 @@ PropertyDefinitionsPtr YarpKinematicUnit::createPropertyDefinitions()
                                       getConfigIdentifier()));
 }
 
+
+
+void armarx::YarpKinematicUnit::request(const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::release(const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::init(const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::start(const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::stop(const Ice::Current &)
+{
+}
+
+UnitExecutionState armarx::YarpKinematicUnit::getExecutionState(const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::requestJoints(const StringSequence &, const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::releaseJoints(const StringSequence &, const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::switchControlMode(const NameControlModeMap &, const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::setJointAngles(const NameValueMap &, const Ice::Current &)
+{
+
+}
+
+void armarx::YarpKinematicUnit::setJointVelocities(const NameValueMap &, const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::setJointTorques(const NameValueMap &, const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::setJointAccelerations(const NameValueMap &, const Ice::Current &)
+{
+}
+
+void armarx::YarpKinematicUnit::setJointDecelerations(const NameValueMap &, const Ice::Current &)
+{
+}

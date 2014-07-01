@@ -52,12 +52,12 @@ namespace armarx
     {
         m_strRightPort = getProperty<std::string>("RemoteLeft").getValue();
         m_strLeftPort = getProperty<std::string>("RemoteRight").getValue();
-        m_strCamera = getProperty<std::string>("Camera").getValue();
         m_strCarrier = getProperty<std::string>("Carrier").getValue();
 
 
-        m_bLeftCamUsed = (m_strCamera == "left" || m_strCamera == "both");
-        m_bRightCamUsed = (m_strCamera == "right" || m_strCamera == "both");
+
+        m_bLeftCamUsed = (getProperty<SelectedCameras>("Camera").getValue() == eLeftCam || getProperty<SelectedCameras>("Camera").getValue() == eBothCams);
+        m_bRightCamUsed = (getProperty<SelectedCameras>("Camera").getValue() == eRightCam || getProperty<SelectedCameras>("Camera").getValue() == eBothCams);
 
         if (!m_bLeftCamUsed && !m_bRightCamUsed)
         {

@@ -44,6 +44,14 @@
 
 namespace armarx
 {
+
+    enum SelectedCameras
+    {
+        eLeftCam,
+        eRightCam,
+        eBothCams
+    };
+
     class YarpImageProviderPropertyDefinitions:
         public armarx::ComponentPropertyDefinitions
     {
@@ -51,11 +59,16 @@ namespace armarx
         YarpImageProviderPropertyDefinitions(std::string prefix):
             ComponentPropertyDefinitions(prefix)
         {
-            defineOptionalProperty<std::string>("Camera", std::string("left"), "Which camera image should be provide: 'left', 'right', 'both'");
+            defineOptionalProperty<SelectedCameras>("Camera", eLeftCam, "Which camera image should be provide")
+                    .setCaseInsensitive(true)
+                    .map("right", eRightCam)
+                    .map("left", eLeftCam)
+                    .map("both", eBothCams);
+
             defineOptionalProperty<std::string>("RemoteLeft", std::string("/icub/cam/left"), "Romote Yarp port to receive the left image");
             defineOptionalProperty<std::string>("RemoteRight", std::string("/icub/cam/right"), "Romote Yarp port to receive the right image");
             defineOptionalProperty<std::string>("Carrier", std::string("udp"), "Yarp Connection carrier");
-            defineOptionalProperty<std::string>("CalibrationFile", "", "Camera calibration file, will be made available in the SLICE interface");
+            defineRequiredProperty<std::string>("CalibrationFile", "Camera calibration file, will be made available in the SLICE interface");
         }
     };
 
@@ -145,7 +158,6 @@ namespace armarx
         yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb> > m_leftImgPort;
         yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb> > m_rightImgPort;
 
-        std::string m_strCamera;
         std::string m_strRightPort;
         std::string m_strLeftPort;
         std::string m_strCarrier;
