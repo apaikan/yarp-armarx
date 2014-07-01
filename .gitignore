@@ -5,6 +5,7 @@
 *.obj
 *.swp
 *.swo
+*.*~
 
 # Compiled Dynamic libraries
 *.so

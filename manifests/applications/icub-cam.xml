@@ -5,6 +5,22 @@
     <authors>
         <author email="ali.paikan@iit.it">Ali Paikan</author>
     </authors>
+
+    <module>
+        <name>iCub_SIM</name>
+        <node>localhost</node>
+    </module>
+
+    <module>
+        <name>prepare_simulator.sh</name>
+        <workdir>/home/SMBAD/paikan/home/yarp-armarx/scripts</workdir>
+        <node>localhost</node>
+        <dependencies>
+            <port timeout="10">/icubSim/world</port>
+            <port timeout="10">/icubSim/head/rpc:i</port>
+        </dependencies>
+    </module>
+
     <module>
         <name>ArmarXGuiRun</name>
         <parameters>--Ice.Default.Locator="IceGrid/Locator:tcp -p 4096 -h localhost" --Ice.ThreadPool.Client.SizeMax=20 --Ice.ThreadPool.Server.SizeMax=20 --Ice.PrintStackTraces=1</parameters>
@@ -14,9 +30,13 @@
 
     <module>
         <name>YARPImageProviderRun</name>
-        <parameters>--Ice.Default.Locator="IceGrid/Locator:tcp -p 4096 -h localhost" --Ice.ThreadPool.Client.SizeMax=20 --Ice.ThreadPool.Server.SizeMax=20 --Ice.PrintStackTraces=1 --Ice.Config=/home/SMBAD/paikan/home/yarp-armarx/conf</parameters>
+        <parameters>--Ice.Default.Locator="IceGrid/Locator:tcp -p 4096 -h localhost" --Ice.ThreadPool.Client.SizeMax=20 --Ice.ThreadPool.Server.SizeMax=20 --Ice.PrintStackTraces=1 --Ice.Config=/home/SMBAD/paikan/home/yarp-armarx/conf/icub-cam.cfg</parameters>
         <workdir>/home/SMBAD/paikan/home/yarp-armarx/build/bin</workdir>
         <node>localhost</node>
+        <dependencies>
+            <port timeout="10">/icubSim/cam/left</port>
+            <port timeout="10">/icubSim/cam/right</port>
+        </dependencies>
     </module>
 
 </application>
