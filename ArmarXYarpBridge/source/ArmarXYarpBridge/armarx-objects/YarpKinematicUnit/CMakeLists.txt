@@ -11,21 +11,27 @@ armarx_component_set_name("YarpKinematicUnit")
 
 find_package(Eigen3 QUIET)
 armarx_build_if(Eigen3_FOUND "Eigen3 not available")
-include_directories(${Eigen3_INCLUDE_DIR})
-
-
-armarx_build_if(BUILD "library disabled")
+if(Eigen3_FOUND)
+    include_directories(${Eigen3_INCLUDE_DIR})
+endif()
 
 find_package(Simox QUIET)
 armarx_build_if(Simox_FOUND "Simox-VirtualRobot not available")
-include_directories(${Simox_INCLUDE_DIRS})
+if(Simox_FOUND)
+    include_directories(${Simox_INCLUDE_DIRS})
+endif()
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ${YARP_LIBRARIES} ${Simox_LIBRARIES})
+find_package(ICUB)
+if(ICUB_FOUND)
+    include_directories(${ICUB_INCLUDE_DIRS})
+endif()
 
-set(SOURCES YarpKinematicUnit.cpp)
-set(HEADERS YarpKinematicUnit.h)
+set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ArmarXCoreUnits YarpKinematicUnit ${YARP_LIBRARIES} icubmod)
+
+set(SOURCES YarpKinematicUnit.cpp YarpMotorInterfaceHelper.cpp)
+set(HEADERS YarpKinematicUnit.h YarpMotorInterfaceHelper.h)
 
 armarx_add_component("${SOURCES}" "${HEADERS}")
 
 # add unit tests
-add_subdirectory(test)
+# add_subdirectory(test)

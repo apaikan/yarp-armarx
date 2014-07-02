@@ -15,6 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package    ArmarXYarpBridge::ArmarXObjects::YarpKinematicUnit
+ * @author     Mirko Waechter ( mirko.waechter at kit dot edu)
  * @author     Ali Paikan ( ali dot paikan at iit dot it )
  * @date       2014
  * @copyright  http://www.gnu.org/licenses/gpl.txt
@@ -26,16 +27,13 @@
 
 
 #include <Core/core/Component.h>
+#include <Core/core/services/tasks/PeriodicTask.h>
 
 #include <Core/interface/units/KinematicUnitInterface.h>
 
 #include <Core/units/KinematicUnit.h>
 
-
-// yarp interfaces
-#include <yarp/dev/IPositionControl.h>
-#include <yarp/dev/IEncoders.h>
-#include <yarp/dev/Drivers.h>
+#include "YarpMotorInterfaceHelper.h"
 
 
 namespace armarx
@@ -52,7 +50,8 @@ namespace armarx
         YarpKinematicUnitPropertyDefinitions(std::string prefix):
             KinematicUnitPropertyDefinitions(prefix)
         {
-            defineRequiredProperty<std::string>("robot", "icub", "Robot name");
+            defineOptionalProperty<std::string>("Robot", std::string("icub"), "Robot name");
+            defineOptionalProperty<std::string>("Parts", "left_arm:Left Arm;right_arm:Right Arm;head:Head;torso:Hip;left_leg:Left Leg;right_leg:Right Leg", "List of robot part names (icubName:SimoxRobotNodeSetName)");
             //defineOptionalProperty<std::string>("device", "remote_controlboard", "");
         }
     };
@@ -84,17 +83,13 @@ namespace armarx
          */
         virtual PropertyDefinitionsPtr createPropertyDefinitions();
 
-        // UnitResourceManagementInterface interface
+        // KinematicUnit
     public:
-        void request(const Ice::Current &);
-        void release(const Ice::Current &);
+        virtual void onInitKinematicUnit();
+        virtual void onStartKinematicUnit();
+        virtual void onExitKinematicUnit();
 
-        // UnitExecutionManagementInterface interface
-    public:
-        void init(const Ice::Current &);
-        void start(const Ice::Current &);
-        void stop(const Ice::Current &);
-        UnitExecutionState getExecutionState(const Ice::Current &);
+
 
         // KinematicUnitInterface interface
     public:
@@ -109,9 +104,14 @@ namespace armarx
 
         // yarp related properties 
     private: 
-        yarp::dev::PolyDriver   driver; 
-        yarp::dev::IEncoders    *encoders;
-        yarp::dev::IPositionControl    *positions;
+        void report();
+        typedef std::map<std::string, YarpMotorInterfaceHelper*> InterfaceMap;
+        InterfaceMap   yarpMotorInterfaces;
+        typedef std::map<std::string, std::pair<std::string, int> > NameIndexMap;
+        NameIndexMap nameIndexMap;
+
+
+        PeriodicTask<YarpKinematicUnit>::pointer_type task;
     };
 }
 

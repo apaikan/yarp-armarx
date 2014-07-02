@@ -11,7 +11,6 @@ armarx_build_if(IVT_FOUND "ivt library not found")
 if(IVT_FOUND)
     include_directories(${IVT_INCLUDE_DIRS})
 endif()
-include_directories(${VisionX_INCLUDE_DIRS})
 
 set(COMPONENT_LIBS ${IVT_LIBRARIES} ${Boost_LIBRARIES}  ${YARP_LIBRARIES})
 #VisionXInterfaces VisionXCore VisionXTools 

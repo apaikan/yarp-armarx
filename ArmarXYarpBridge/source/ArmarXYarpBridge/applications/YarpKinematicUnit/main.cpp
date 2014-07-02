@@ -24,8 +24,14 @@
 #include "YarpKinematicUnitApp.h"
 #include <Core/core/logging/Logging.h>
 
+#include <yarp/os/Network.h>
+#include <yarp/dev/Drivers.h>
+#include <yarp/dev/PolyDriver.h>
+
 int main(int argc, char* argv[])
 {
+    yarp::os::Network yarp;
+
     armarx::ApplicationPtr app = armarx::Application::createInstance < armarx::YarpKinematicUnitApp > ();
     app->setName("YarpKinematicUnit");
 
