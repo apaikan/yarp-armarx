@@ -88,6 +88,7 @@ void YarpKinematicUnit::onExitKinematicUnit()
         task->stop();
     for(InterfaceMap::iterator it = yarpMotorInterfaces.begin(); it != yarpMotorInterfaces.end(); it++)
     {
+        it->second->close();        
         delete it->second;
 
     }
@@ -124,16 +125,6 @@ void armarx::YarpKinematicUnit::setJointAngles(const NameValueMap &jointsMap , c
                 return;
             itInterface->second->getPositionInterface()->positionMove(index, it->second*180/M_PI);
         }
-//        for(size_t i = 0; i < nodes.size(); i++)
-//        {
-//            if(nodes[i]->getName() == it->first)
-//            {
-////                ARMARX_IMPORTANT << "i: " << i << " name: " << it->first<< " value: " << it->second;
-
-//                fakeInterface->getPositionInterface()->positionMove(i, it->second*180/M_PI);
-//                break;
-//            }
-//        }
     }
 }
 
@@ -155,38 +146,77 @@ void armarx::YarpKinematicUnit::setJointDecelerations(const NameValueMap &, cons
 
 void YarpKinematicUnit::report()
 {
-//    if(!fakeInterface->getEncoderInterface())
-//    {
-//        ARMARX_ERROR << deactivateSpam(3) << "getEncoderInterface is zero";
-//        return;
-//    }
-//    VirtualRobot::RobotNodeSetPtr rns = robot->getRobotNodeSet("Left Arm");
-//    std::vector<VirtualRobot::RobotNodePtr> nodes = rns->getAllRobotNodes();
-//    int jointsNum = 0;
-//    if(!fakeInterface->getEncoderInterface()->getAxes(&jointsNum))
-//    {
-//        ARMARX_ERROR << deactivateSpam(3) << "Failed to get joint count";
-//        return;
-//    }
-//    double *  encoderValues = new double[jointsNum];
-//    try
-//    {
+    NameValueMap newValues;
 
-//        fakeInterface->getEncoderInterface()->getEncoders(encoderValues);
-//        NameValueMap newValues;
-//        for(size_t i = 0; i < nodes.size() && i < jointsNum; i++)
-//        {
-//            newValues[nodes.at(i)->getName()] = encoderValues[i]/180.0*M_PI;
-//        }
-//        delete [] encoderValues;
-//        encoderValues = NULL;
-//        listenerPrx->reportJointAngles(newValues, true);
-//    }
-//    catch(...)
-//    {
-//        delete [] encoderValues;
-//        throw;
-//    }
+    for(InterfaceMap::iterator it = yarpMotorInterfaces.begin(); it != yarpMotorInterfaces.end(); it++)
+    {
+        VirtualRobot::RobotNodeSetPtr rns = robot->getRobotNodeSet(it->first);
+        std::vector<VirtualRobot::RobotNodePtr> nodes = rns->getAllRobotNodes();
+        YarpMotorInterfaceHelper* interface = it->second;
+
+        int jointsNum = 0;
+        if(!interface->getEncoderInterface()->getAxes(&jointsNum))
+        {
+            ARMARX_WARNING << deactivateSpam(3) << "Failed to get joint count of "<<it->first;
+            return;
+        }
+
+        double* encoderValues = new double[jointsNum];
+        if(!interface->getEncoderInterface()->getEncoders(encoderValues))
+        {                
+            ARMARX_WARNING << deactivateSpam(3) << "Failed to get the encoder values of " << it->first;
+            delete [] encoderValues;
+            return;
+        }
+
+        //ARMARX_IMPORTANT <<"Joint "<<it->first;        
+        for(size_t i = 0; i < nodes.size() && i < (size_t)jointsNum; i++)
+        {
+            //ARMARX_IMPORTANT <<"\t"<<nodes.at(i)->getName() << " : " <<encoderValues[i];
+            newValues[nodes.at(i)->getName()] = encoderValues[i]/180.0*M_PI;
+        }
+        delete [] encoderValues;
+        encoderValues = NULL;
+    }
+    
+    listenerPrx->reportJointAngles(newValues, true);
+
+
+    /*
+    if(!fakeInterface->getEncoderInterface())
+    {
+        ARMARX_ERROR << deactivateSpam(3) << "getEncoderInterface is zero";
+        return;
+    }
+
+    VirtualRobot::RobotNodeSetPtr rns = robot->getRobotNodeSet("Left Arm");
+    std::vector<VirtualRobot::RobotNodePtr> nodes = rns->getAllRobotNodes();
+    int jointsNum = 0;
+    if(!fakeInterface->getEncoderInterface()->getAxes(&jointsNum))
+    {
+        ARMARX_ERROR << deactivateSpam(3) << "Failed to get joint count";
+        return;
+    }
+    double *  encoderValues = new double[jointsNum];
+    try
+    {
+
+        fakeInterface->getEncoderInterface()->getEncoders(encoderValues);
+        NameValueMap newValues;
+        for(size_t i = 0; i < nodes.size() && i < jointsNum; i++)
+        {
+            newValues[nodes.at(i)->getName()] = encoderValues[i]/180.0*M_PI;
+        }
+        delete [] encoderValues;
+        encoderValues = NULL;
+        listenerPrx->reportJointAngles(newValues, true);
+    }
+    catch(...)
+    {
+        delete [] encoderValues;
+        throw;
+    }
+    */
 
 }
 

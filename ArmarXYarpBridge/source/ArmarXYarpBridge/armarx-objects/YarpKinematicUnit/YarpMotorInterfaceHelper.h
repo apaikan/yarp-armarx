@@ -37,7 +37,7 @@
 #include <yarp/dev/IEncoders.h>
 #include <yarp/dev/IPositionControl.h>
 #include <yarp/dev/IVelocityControl.h>
-
+#include <yarp/dev/ITorqueControl.h>
 
 
 namespace armarx
@@ -66,11 +66,21 @@ namespace armarx
             return iPosition;
         }
 
+        yarp::dev::IVelocityControl* getVelocityInterface() {
+            return iVelocity;
+        }
+
+        yarp::dev::ITorqueControl* getTorqueInterface() {
+            return iTorque;
+        }
+
     private: 
         yarp::os::Property options;
         yarp::dev::PolyDriver   driver; 
         yarp::dev::IEncoders    *iEncoder;
         yarp::dev::IPositionControl    *iPosition;
+        yarp::dev::IVelocityControl *iVelocity;
+        yarp::dev::ITorqueControl *iTorque;
     };
 }
 

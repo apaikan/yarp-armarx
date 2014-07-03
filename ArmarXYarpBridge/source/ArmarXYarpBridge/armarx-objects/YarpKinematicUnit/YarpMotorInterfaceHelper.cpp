@@ -37,6 +37,8 @@ YarpMotorInterfaceHelper::YarpMotorInterfaceHelper(const yarp::os::Property& opt
 
    iEncoder = NULL;
    iPosition = NULL;
+   iVelocity = NULL;
+   iTorque = NULL;
 
    YarpMotorInterfaceHelper::options = options;
 }
@@ -68,16 +70,32 @@ bool YarpMotorInterfaceHelper::open()
         ARMARX_ERROR_S <<"Cannot open yarp device driver! options: " << options.toString();
         return false;
     }
-    
-    
+        
     // view the interfaces
     driver.view(iEncoder);
-    driver.view(iPosition);
-    if(!iEncoder || !iPosition) {
-        ARMARX_ERROR_S << "Failed to view some of the Yarp interfaces"; 
+    if(!iEncoder) {
+        ARMARX_ERROR_S << "Failed to open encoders interface of " << partName; 
         return false;
     }
     
+    driver.view(iPosition);
+    if(!iPosition) {
+        ARMARX_ERROR_S << "Failed to open potitions interface of " << partName; 
+        return false;
+    }
+   
+    driver.view(iVelocity);
+    if(!iVelocity) {
+        ARMARX_ERROR_S << "Failed to open velocities interface of " << partName; 
+        return false;
+    }
+ 
+    driver.view(iTorque);
+    if(!iTorque) {
+        ARMARX_ERROR_S << "Failed to open torques interface of " << partName; 
+        return false;
+    }
+ 
     return true;
 }
 
