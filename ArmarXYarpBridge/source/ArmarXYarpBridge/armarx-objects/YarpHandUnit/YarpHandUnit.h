@@ -15,6 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package    ArmarXYarpBridge::ArmarXObjects::YarpHandUnit
+ * @author     Mirko Waechter ( mirko.waechter at kit dot edu)
  * @author     Ali Paikan ( ali dot paikan at iit dot it )
  * @date       2014
  * @copyright  http://www.gnu.org/licenses/gpl.txt
