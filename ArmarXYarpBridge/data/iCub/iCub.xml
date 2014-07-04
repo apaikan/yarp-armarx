@@ -27,15 +27,17 @@
 		<Child name="Torso1"/>
 	</RobotNode>
 
-	
-	<RobotNode name="Torso1"><!-- PITCH -->
+
+	<RobotNode name="Torso3"><!-- YAW -->
+		<Transform>
+			<DH  a="0" d="-5.5" theta="0" alpha="90" units="degree"/>
+		</Transform>
 		<Joint type="revolute">
-			<!--DH a="32" d="0" theta="0" alpha="90" units="degree"/-->
-			<Limits unit="degree" lo="-10" hi="70"/> <!--lo="-22" hi="84"/> changed to values of ini files in main/app/robots/iCubGenova02 (hip:reverse order!)-->
+			<Limits unit="degree" lo="-50" hi="50"/><!--lo="-59" hi="59"/>changed to values of ini files in main/app/robots/iCubGenova02 (hip:reverse order!)-->
 		</Joint>
-		<Child name="Torso2"/>
+		<Child name="CenterArms"/>
 	</RobotNode>
-	
+
 	<RobotNode name="Torso2"><!-- ROLL -->
 		<Transform>
 			<DH a="32" d="0" theta="0" alpha="90" units="degree"/>
@@ -48,21 +50,17 @@
 		<Child name="Torso3"/>
 	</RobotNode>
 
-	
-	<RobotNode name="Torso3"><!-- YAW -->
-		<Transform>
-			<DH  a="0" d="-5.5" theta="0" alpha="90" units="degree"/>
-		</Transform>
+	<RobotNode name="Torso1"><!-- PITCH -->
 		<Joint type="revolute">
-			<Limits unit="degree" lo="-50" hi="50"/><!--lo="-59" hi="59"/>changed to values of ini files in main/app/robots/iCubGenova02 (hip:reverse order!)-->
+			<!--DH a="32" d="0" theta="0" alpha="90" units="degree"/-->
+			<Limits unit="degree" lo="-10" hi="70"/> <!--lo="-22" hi="84"/> changed to values of ini files in main/app/robots/iCubGenova02 (hip:reverse order!)-->
 		</Joint>
-		<Child name="CenterArms"/>
+		<Child name="Torso2"/>
 	</RobotNode>
 	
 	
 	<RobotNode name="CenterArms">
 
-	
 		<!--Child name="UpperBodyModel"/-->
 		<Visualization enable="true">
 			<File type="Inventor">model/upperbody.iv</File>
@@ -188,9 +186,10 @@
 	</RobotNodeSet>
 
 	<RobotNodeSet name="Hip" kinematicRoot="iCubRoot">
-		<Node name="Torso1"/>
-		<Node name="Torso2"/>
+         <!-- The hip joints order are reordered so it works with armarx-yarp bridging for icub --> 
 		<Node name="Torso3"/>
+		<Node name="Torso2"/>
+		<Node name="Torso1"/>
 	</RobotNodeSet>
 
 	<RobotNodeSet name="Hip Left Arm" kinematicRoot="iCubRoot" tcp="Left Arm TCP">
@@ -248,5 +247,49 @@
 		<Node name="Right Arm Wrist2"/>
 	</RobotNodeSet>
 
+	<RobotNodeSet name="Robot" kinematicRoot="iCubRoot">
+		<Node name="Torso1"/>
+		<Node name="Torso2"/>
+		<Node name="Torso3"/>
+
+		<Node name="Left Arm Shoulder1"/>
+		<Node name="Left Arm Shoulder2"/>
+		<Node name="Left Arm Shoulder3"/>
+		<Node name="Left Arm Elbow1"/>
+		<Node name="Left Arm Elbow2"/>
+		<Node name="Left Arm Wrist1"/>
+		<Node name="Left Arm Wrist2"/>
+
+		<Node name="Right Arm Shoulder1"/>
+		<Node name="Right Arm Shoulder2"/>
+		<Node name="Right Arm Shoulder3"/>
+		<Node name="Right Arm Elbow1"/>
+		<Node name="Right Arm Elbow2"/>
+		<Node name="Right Arm Wrist1"/>
+		<Node name="Right Arm Wrist2"/>
+
+		<Node name="Neck1"/>
+		<Node name="Neck2"/>
+		<Node name="Neck3"/>
+		<Node name="EyeLeft1"/>
+		<Node name="EyeLeft2"/>
+		<Node name="EyeRight1"/>
+		<Node name="EyeRight2"/>
+
+		<Node name="Left Leg Waist1"/>
+		<Node name="Left Leg Waist2"/>
+		<Node name="Left Leg Waist3"/>
+		<Node name="Left Leg Knee"/>
+		<Node name="Left Leg Foot1"/>
+		<Node name="Left Leg Foot2"/>
+
+		<Node name="Right Leg Waist1"/>
+		<Node name="Right Leg Waist2"/>
+		<Node name="Right Leg Waist3"/>
+		<Node name="Right Leg Knee"/>
+		<Node name="Right Leg Foot1"/>
+		<Node name="Right Leg Foot2"/>
+
+    </RobotNodeSet>
 
 </Robot>

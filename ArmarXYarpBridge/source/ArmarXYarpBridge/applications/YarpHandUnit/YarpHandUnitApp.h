@@ -14,26 +14,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package    ArmarXYarpBridge::application::YarpKinematicUnit
+ * @package    ArmarXYarpBridge::application::YarpHandUnit
  * @author     Ali Paikan ( ali dot paikan at iit dot it )
  * @date       2014
  * @copyright  http://www.gnu.org/licenses/gpl.txt
  *             GNU General Public License
  */
 
-#include "YarpKinematicUnitApp.h"
-#include <Core/core/logging/Logging.h>
+#ifndef _ARMARX_APPLICATION_ArmarXYarpBridge_YarpHandUnit_H
+#define _ARMARX_APPLICATION_ArmarXYarpBridge_YarpHandUnit_H
 
-#include <yarp/os/Network.h>
-//#include <yarp/dev/Drivers.h>
-//#include <yarp/dev/PolyDriver.h>
 
-int main(int argc, char* argv[])
+#include <ArmarXYarpBridge/armarx-objects/YarpHandUnit/YarpHandUnit.h>
+
+#include <Core/core/application/Application.h>
+
+namespace armarx
 {
-    yarp::os::Network yarp;
-
-    armarx::ApplicationPtr app = armarx::Application::createInstance < armarx::YarpKinematicUnitApp > ();
-    app->setName("YarpKinematicUnit");
-
-    return app->main(argc, argv);
+    /**
+     * @class YarpHandUnitApp
+     * @brief A brief description
+     *
+     * Detailed Description
+     */
+    class YarpHandUnitApp :
+        virtual public armarx::Application
+    {
+        /**
+         * @see armarx::Application::setup()
+         */
+        void setup(const ManagedIceObjectRegistryInterfacePtr& registry,
+                   Ice::PropertiesPtr properties)
+        {
+            registry->addObject( Component::create<YarpHandUnit>(properties) );
+        }
+    };
 }
+
+#endif

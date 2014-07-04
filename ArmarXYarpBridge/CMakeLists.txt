@@ -6,6 +6,7 @@ find_package("ArmarXCore" REQUIRED)
 
 find_package(YARP REQUIRED)
 include_directories(${YARP_INCLUDE_DIRS})
+find_package(ICUB REQUIRED)
 
 
 # Include provides all necessary ArmarX CMake macros

@@ -138,9 +138,10 @@
 	</RobotNode>
 
 	<RobotNodeSet name="Head" kinematicRoot="Neck1">
-		<Node name="Neck1"/>
+        <!-- The necks order are reordered so it works with armarx-yarp bridging for icub --> 
 		<Node name="Neck2"/>
 		<Node name="Neck3"/>
+		<Node name="Neck1"/>
 		<Node name="EyeLeft1"/>
 		<Node name="EyeLeft2"/>
 		<Node name="EyeRight1"/>

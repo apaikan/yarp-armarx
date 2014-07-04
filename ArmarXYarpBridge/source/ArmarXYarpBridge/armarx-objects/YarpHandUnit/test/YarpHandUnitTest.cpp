@@ -14,26 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package    ArmarXYarpBridge::application::YarpKinematicUnit
+ * @package    ArmarXYarpBridge::ArmarXObjects::YarpHandUnit
  * @author     Ali Paikan ( ali dot paikan at iit dot it )
  * @date       2014
  * @copyright  http://www.gnu.org/licenses/gpl.txt
  *             GNU General Public License
  */
 
-#include "YarpKinematicUnitApp.h"
-#include <Core/core/logging/Logging.h>
+#define BOOST_TEST_MODULE ArmarXYarpBridge::ArmarXObjects::YarpHandUnit
 
-#include <yarp/os/Network.h>
-//#include <yarp/dev/Drivers.h>
-//#include <yarp/dev/PolyDriver.h>
+#define ARMARX_BOOST_TEST
 
-int main(int argc, char* argv[])
+#include <ArmarXYarpBridge/Test.h>
+#include <ArmarXYarpBridge/armarx-objects/YarpHandUnit/YarpHandUnit.h>
+
+#include <iostream>
+
+BOOST_AUTO_TEST_CASE(testExample)
 {
-    yarp::os::Network yarp;
+    armarx::YarpHandUnit instance;
 
-    armarx::ApplicationPtr app = armarx::Application::createInstance < armarx::YarpKinematicUnitApp > ();
-    app->setName("YarpKinematicUnit");
-
-    return app->main(argc, argv);
+    BOOST_CHECK_EQUAL(true, true);
 }

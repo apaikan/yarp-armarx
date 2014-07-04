@@ -1,4 +1,4 @@
-armarx_component_set_name("YarpKinematicUnitApp")
+armarx_component_set_name("YarpHandUnitApp")
 
 #find_package(MyLib QUIET)
 #armarx_build_if(MyLib_FOUND "MyLib not available")
@@ -29,7 +29,7 @@ endif()
 
 
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ArmarXCoreUnits YarpKinematicUnit ${YARP_LIBRARIES} icubmod ${Simox_LIBRARIES})
+set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ArmarXCoreUnits YarpHandUnit ${YARP_LIBRARIES} icubmod ${Simox_LIBRARIES})
 
 set(EXE_SOURCE main.cpp)
 

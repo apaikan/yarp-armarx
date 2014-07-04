@@ -56,9 +56,11 @@ void YarpMotorInterfaceHelper::close()
 bool YarpMotorInterfaceHelper::open()
 {
     string robotName = options.find("robot").asString();
-    string partName = options.find("part").asString();
+    string partName = options.find("part").asString();    
+    string unitName = (options.check("unit_name")) ? options.find("unit_name").asString() : "YarpKinematicUnit";
+
     string remoteName = string("/") + robotName + string("/") + partName;
-    string localName = string("/YarpKinematicUnit/") + robotName + string("/") + partName;
+    string localName = string("/") + unitName + string("/") + robotName + string("/") + partName;
 
     // put the required options
     options.put("device", "remote_controlboard");    

@@ -111,9 +111,9 @@ void armarx::YarpKinematicUnit::switchControlMode(const NameControlModeMap &, co
 void armarx::YarpKinematicUnit::setJointAngles(const NameValueMap &jointsMap , const Ice::Current &)
 {
 
-    VirtualRobot::RobotNodeSetPtr rns = robot->getRobotNodeSet("Left Arm");
+    //VirtualRobot::RobotNodeSetPtr rns = robot->getRobotNodeSet("Left Arm");
+    //std::vector<VirtualRobot::RobotNodePtr> nodes = rns->getAllRobotNodes();
 
-    std::vector<VirtualRobot::RobotNodePtr> nodes = rns->getAllRobotNodes();
     for(NameValueMap::const_iterator it = jointsMap.begin(); it != jointsMap.end(); it++)
     {
         std::string setName = nameIndexMap[it->first].first;
@@ -168,8 +168,8 @@ void YarpKinematicUnit::report()
             delete [] encoderValues;
             return;
         }
-
-        //ARMARX_IMPORTANT <<"Joint "<<it->first;        
+        
+        //ARMARX_IMPORTANT <<"Joint set "<<it->first;        
         for(size_t i = 0; i < nodes.size() && i < (size_t)jointsNum; i++)
         {
             //ARMARX_IMPORTANT <<"\t"<<nodes.at(i)->getName() << " : " <<encoderValues[i];

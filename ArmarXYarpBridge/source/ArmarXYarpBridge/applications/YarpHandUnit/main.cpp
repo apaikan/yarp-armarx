@@ -14,26 +14,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package    ArmarXYarpBridge::application::YarpKinematicUnit
+ * @package    ArmarXYarpBridge::application::YarpHandUnit
  * @author     Ali Paikan ( ali dot paikan at iit dot it )
  * @date       2014
  * @copyright  http://www.gnu.org/licenses/gpl.txt
  *             GNU General Public License
  */
 
-#include "YarpKinematicUnitApp.h"
+#include "YarpHandUnitApp.h"
 #include <Core/core/logging/Logging.h>
-
 #include <yarp/os/Network.h>
-//#include <yarp/dev/Drivers.h>
-//#include <yarp/dev/PolyDriver.h>
 
 int main(int argc, char* argv[])
 {
     yarp::os::Network yarp;
 
-    armarx::ApplicationPtr app = armarx::Application::createInstance < armarx::YarpKinematicUnitApp > ();
-    app->setName("YarpKinematicUnit");
+    armarx::ApplicationPtr app = armarx::Application::createInstance < armarx::YarpHandUnitApp > ();
+    app->setName("YarpHandUnit");
 
     return app->main(argc, argv);
 }
