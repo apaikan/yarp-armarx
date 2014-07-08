@@ -9,6 +9,7 @@ set(SCENARIO_COMPONENTS
     YarpKinematicUnitApp
     YarpImageProviderApp
     YarpHandUnitApp
+    YarpPlatformUnitApp
     )
 
 # optional 3rd parameter: "path/to/global/config.cfg"
