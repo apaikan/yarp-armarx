@@ -166,5 +166,25 @@
 		<Node name="Left Hand Pinky Joint3"/>
 		<Node name="Left Hand Pinky Joint4"/>
 	</RobotNodeSet>
+
+        <RobotNodeSet name="Left ArmWithHand" kinematicRoot="Left Arm Base" tcp="Left Arm TCP">
+                <Node name="Left Arm Shoulder1"/>
+                <Node name="Left Arm Shoulder2"/>
+                <Node name="Left Arm Shoulder3"/>
+                <Node name="Left Arm Elbow1"/>
+                <Node name="Left Arm Elbow2"/>
+                <Node name="Left Arm Wrist1"/>
+                <Node name="Left Arm Wrist2"/>
+
+                <Node name="Left Hand Ring Joint1"/>
+                <Node name="Left Hand Thumb Joint2"/>
+                <Node name="Left Hand Thumb Joint1"/>
+                <Node name="Left Hand Thumb Joint3"/>
+                <Node name="Left Hand Index Joint2"/>
+                <Node name="Left Hand Index Joint3"/>
+                <Node name="Left Hand Middle Joint2"/>
+                <Node name="Left Hand Middle Joint3"/>
+                <Node name="Left Hand Ring Joint2"/>
+        </RobotNodeSet>
 	
 	</Robot>

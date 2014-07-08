@@ -8,7 +8,7 @@
 		</Transform>
 		<Joint type="revolute">
 			<!-- CenterOfArms is -143.3, the official DH_d value is -223.3(-> -80 here), but in the iCubGui the value is -193.3(-> -50 here), that looks better?! --> 
-			<!--DH a="0" d="-50.0" theta="-90" alpha="-90" units="degree"/-->
+                        <!--DH a="0" d="-50.0" theta="-90" alpha="-90" units="degree"/-->
 			<Limits unit="degree" lo="-50" hi="50"/>
 		</Joint>
 		<Child name="Neck2"/>

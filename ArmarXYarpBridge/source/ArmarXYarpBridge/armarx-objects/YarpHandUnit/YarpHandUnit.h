@@ -85,8 +85,8 @@ namespace armarx
     public:
         void open(const Ice::Current &);
         void close(const Ice::Current &);
-        void preshape(const std::string &preshapeName, const Ice::Current &);
-        NameValueMap getPreshapeJointValues(const std::string&, const Ice::Current&);
+        void preshape(const std::string &preshapeName, const Ice::Current &c=Ice::Current());
+        NameValueMap getPreshapeJointValues(const std::string&, const Ice::Current &c=Ice::Current());
 
         // HandUnit interface
     public:
@@ -95,25 +95,20 @@ namespace armarx
         void onExitHandUnit();
         
     protected:
-
-        std::vector<std::string> getPreShapeSet(const std::string& preshapePrefix);
-
         YarpMotorInterfaceHelper*   yarpMotorInterface;
-        enum HandState
-        {
-            eUnkown,
-            ePreshape,
-            eOpen,
-            eClosed
-        };
-        HandState handState;
-        typedef std::pair<HandState, std::vector<std::string> >  CommandBuffer;
-        CommandBuffer commandBuffer;
-        Mutex commandMutex;
+        typedef std::map<std::string, int> NameIndexMap;
+        NameIndexMap nameIndexMap;
 
+        Mutex commandMutex;
         RunningTask<YarpHandUnit>::pointer_type task;
+        
+        typedef std::map<std::string, NameValueMap> PreshapeSequences;
+        PreshapeSequences handshapeSequence;
+
     private: 
         void run();
+        PreshapeSequences loadPreshapes(std::string);
+        void handPositionMove(NameValueMap &);
     };
 }
 

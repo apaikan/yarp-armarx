@@ -30,6 +30,7 @@ using namespace armarx;
 #include <VirtualRobot/Robot.h>
 #include <VirtualRobot/RobotNodeSet.h>
 #include <VirtualRobot/EndEffector/EndEffector.h>
+#include <VirtualRobot/RobotConfig.h>
 #include <ArmarXYarpBridge/armarx-objects/YarpKinematicUnit/YarpMotorInterfaceHelper.h>
 
 using namespace VirtualRobot;
@@ -63,24 +64,38 @@ void YarpHandUnit::run()
 
 void armarx::YarpHandUnit::open(const Ice::Current &)
 {
-    ARMARX_IMPORTANT<<"Received Open command";
-    ScopedLock lock(commandMutex);
+    //ARMARX_IMPORTANT<<"Received Open command";
+    //ScopedLock lock(commandMutex);
 
-    commandBuffer = std::make_pair(eOpen, getPreShapeSet("Open"));
 }
 
 void armarx::YarpHandUnit::close(const Ice::Current &)
 {
-    ARMARX_IMPORTANT<<"Received Close command";
+    //ARMARX_IMPORTANT<<"Received Close command";
+    //ScopedLock lock(commandMutex);
 }
 
 void armarx::YarpHandUnit::preshape(const std::string &preshapeName, const Ice::Current &)
 {
-    ARMARX_IMPORTANT<<"Received Preshape command";
+    ScopedLock lock(commandMutex);
+    if(handshapeSequence.find(preshapeName) != handshapeSequence.end())
+        handPositionMove(handshapeSequence[preshapeName]);
+    else    
+        ARMARX_WARNING << "Cannot find preshape command " << preshapeName;
 }
 
 void armarx::YarpHandUnit::onInitHandUnit()
 {
+    handshapeSequence = loadPreshapes(getProperty<std::string>("EndeffectorName").getValue());
+    // create a simple mapping of the simox joints name and the robot joint indices 
+    if(handshapeSequence.size()) 
+    {
+        NameValueMap &jointsMap = handshapeSequence.begin()->second;
+        int index = 7; // the first hand's joint  
+        for(NameValueMap::const_iterator it = jointsMap.begin(); it != jointsMap.end(); it++)
+            nameIndexMap[it->first] = index++;
+    }
+    
     std::string robotName  = getProperty<std::string>("Robot").getValue();
     std::string part  = getProperty<std::string>("YarpRobotPart").getValue();
     std::string unitName = std::string("YarpHandUnit_") + part;
@@ -89,40 +104,50 @@ void armarx::YarpHandUnit::onInitHandUnit()
     options.put("part", part.c_str());
     options.put("unit_name", unitName.c_str());
     yarpMotorInterface = new YarpMotorInterfaceHelper(options);
-    task = new RunningTask<YarpHandUnit>(this, &YarpHandUnit::run);
+    //task = new RunningTask<YarpHandUnit>(this, &YarpHandUnit::run);
 }
 
 void armarx::YarpHandUnit::onStartHandUnit()
 {
-    if(yarpMotorInterface->open())
-        task->start();
+    yarpMotorInterface->open();
+
+    //if(yarpMotorInterface->open())
+    //    task->start();
 }
 
 void armarx::YarpHandUnit::onExitHandUnit()
 {
-    if(task)
-        task->stop();
+    //if(task)
+    //    task->stop();
     delete yarpMotorInterface;
 }
 
-std::vector<std::string> YarpHandUnit::getPreShapeSet(const std::string &preshapePrefix)
+
+
+NameValueMap YarpHandUnit::getPreshapeJointValues(const std::string&preshapeName, const Ice::Current&)
 {
-    std::vector<std::string> result;
-    std::vector<std::string> preshapes = robot->getEndEffector(getProperty<std::string>("EndeffectorName").getValue())->getPreshapes();
+    EndEffectorPtr efp = robot->getEndEffector(getProperty<std::string>("EndeffectorName").getValue());
+    RobotConfigPtr rc = efp->getPreshape(preshapeName);
+    return rc->getRobotNodeJointValueMap();
+}
+
+YarpHandUnit::PreshapeSequences YarpHandUnit::loadPreshapes(std::string endEffectorName)
+{
+    PreshapeSequences eftSeq;
+    std::vector<std::string> preshapes = robot->getEndEffector(endEffectorName)->getPreshapes();
     for(size_t i=0; i < preshapes.size(); i++)
     {
         const std::string & preshapeName = preshapes.at(i);
-        if(preshapeName.find(preshapePrefix) != std::string::npos)
-        {
-            result.push_back(preshapeName);
-        }
+        eftSeq[preshapeName] = getPreshapeJointValues(preshapeName);
     }
-    return result;
+    return eftSeq;
 }
 
-NameValueMap YarpHandUnit::getPreshapeJointValues(const std::string&, const Ice::Current&) 
+void YarpHandUnit::handPositionMove(NameValueMap &jointsMap)
 {
-    NameValueMap dummy;
-    return dummy;
+    if(!yarpMotorInterface)
+        return;
+    for(NameValueMap::const_iterator it = jointsMap.begin(); it != jointsMap.end(); ++it)
+        yarpMotorInterface->getPositionInterface()->positionMove(nameIndexMap[it->first], it->second);
 }
 
