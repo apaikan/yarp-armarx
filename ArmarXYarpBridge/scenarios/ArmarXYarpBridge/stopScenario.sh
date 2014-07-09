@@ -25,3 +25,5 @@ skill YarpImageProviderAppRun ${KILL_SIGNAL}
 
 skill YarpHandUnitAppRun ${KILL_SIGNAL}
 
+skill YarpPlatformUnitAppRun ${KILL_SIGNAL}
+

@@ -147,7 +147,11 @@ void YarpHandUnit::handPositionMove(NameValueMap &jointsMap)
 {
     if(!yarpMotorInterface)
         return;
+    double velocity = getProperty<double>("EndeffectorVelocity").getValue();
     for(NameValueMap::const_iterator it = jointsMap.begin(); it != jointsMap.end(); ++it)
-        yarpMotorInterface->getPositionInterface()->positionMove(nameIndexMap[it->first], it->second);
+    {
+        yarpMotorInterface->getPositionInterface()->setRefSpeed(nameIndexMap[it->first], velocity);
+        yarpMotorInterface->getPositionInterface()->positionMove(nameIndexMap[it->first], it->second*180/M_PI);
+    }
 }
 

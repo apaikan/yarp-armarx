@@ -622,39 +622,39 @@
 	<!-- END EFFECTOR -->
 	<Endeffector name="Left Hand" base="Left Hand Init" tcp="Left Arm TCP" gcp="Left Arm GCP">
         <Preshape name="Open 1">
-            <Node name="Left Hand Index Joint2"  unit="radian" value="30"/>
-            <Node name="Left Hand Index Joint3"  unit="radian" value="10"/>
-            <Node name="Left Hand Middle Joint2" unit="radian" value="10"/>
-            <Node name="Left Hand Middle Joint3" unit="radian" value="10"/>
-            <Node name="Left Hand Ring Joint1"   unit="radian" value="10"/>
-            <Node name="Left Hand Ring Joint2"   unit="radian" value="10"/>
-            <Node name="Left Hand Thumb Joint2"  unit="radian" value="10"/>
-            <Node name="Left Hand Thumb Joint3"  unit="radian" value="10"/>
-            <Node name="Left Hand Thumb Joint4"  unit="radian" value="10"/>
+            <Node name="Left Hand Index Joint2"  unit="degree" value="30"/>
+            <Node name="Left Hand Index Joint3"  unit="degree" value="10"/>
+            <Node name="Left Hand Middle Joint2" unit="degree" value="10"/>
+            <Node name="Left Hand Middle Joint3" unit="degree" value="10"/>
+            <Node name="Left Hand Ring Joint1"   unit="degree" value="10"/>
+            <Node name="Left Hand Ring Joint2"   unit="degree" value="10"/>
+            <Node name="Left Hand Thumb Joint2"  unit="degree" value="10"/>
+            <Node name="Left Hand Thumb Joint3"  unit="degree" value="10"/>
+            <Node name="Left Hand Thumb Joint4"  unit="degree" value="10"/>
         </Preshape>
 
         <Preshape name="Close 1">
-            <Node name="Left Hand Index Joint2"  unit="radian" value="40"/>
-            <Node name="Left Hand Index Joint3"  unit="radian" value="90"/>
-            <Node name="Left Hand Middle Joint2" unit="radian" value="0"/>
-            <Node name="Left Hand Middle Joint3" unit="radian" value="10"/>
-            <Node name="Left Hand Ring Joint1"   unit="radian" value="10"/>
-            <Node name="Left Hand Ring Joint2"   unit="radian" value="10"/>
-            <Node name="Left Hand Thumb Joint2"  unit="radian" value="10"/>
-            <Node name="Left Hand Thumb Joint3"  unit="radian" value="10"/>
-            <Node name="Left Hand Thumb Joint4"  unit="radian" value="50"/>
+            <Node name="Left Hand Index Joint2"  unit="degree" value="40"/>
+            <Node name="Left Hand Index Joint3"  unit="degree" value="85"/>
+            <Node name="Left Hand Middle Joint2" unit="degree" value="0"/>
+            <Node name="Left Hand Middle Joint3" unit="degree" value="10"/>
+            <Node name="Left Hand Ring Joint1"   unit="degree" value="10"/>
+            <Node name="Left Hand Ring Joint2"   unit="degree" value="10"/>
+            <Node name="Left Hand Thumb Joint2"  unit="degree" value="10"/>
+            <Node name="Left Hand Thumb Joint3"  unit="degree" value="10"/>
+            <Node name="Left Hand Thumb Joint4"  unit="degree" value="50"/>
         </Preshape>
 
         <Preshape name="Close 2">
-            <Node name="Left Hand Index Joint2"  unit="radian" value="40"/>
-            <Node name="Left Hand Index Joint3"  unit="radian" value="90"/>
-            <Node name="Left Hand Middle Joint2" unit="radian" value="0"/>
-            <Node name="Left Hand Middle Joint3" unit="radian" value="40"/>
-            <Node name="Left Hand Ring Joint1"   unit="radian" value="40"/>
-            <Node name="Left Hand Ring Joint2"   unit="radian" value="50"/>
-            <Node name="Left Hand Thumb Joint2"  unit="radian" value="40"/>
-            <Node name="Left Hand Thumb Joint3"  unit="radian" value="50"/>
-            <Node name="Left Hand Thumb Joint4"  unit="radian" value="160"/>
+            <Node name="Left Hand Index Joint2"  unit="degree" value="40"/>
+            <Node name="Left Hand Index Joint3"  unit="degree" value="85"/>
+            <Node name="Left Hand Middle Joint2" unit="degree" value="0"/>
+            <Node name="Left Hand Middle Joint3" unit="degree" value="40"/>
+            <Node name="Left Hand Ring Joint1"   unit="degree" value="40"/>
+            <Node name="Left Hand Ring Joint2"   unit="degree" value="50"/>
+            <Node name="Left Hand Thumb Joint2"  unit="degree" value="40"/>
+            <Node name="Left Hand Thumb Joint3"  unit="degree" value="50"/>
+            <Node name="Left Hand Thumb Joint4"  unit="degree" value="160"/>
         </Preshape>
 
 	    <Static>

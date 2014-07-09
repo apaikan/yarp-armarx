@@ -6,3 +6,5 @@ $SCRIPT_PATH/startApplication.sh /home/SMBAD/paikan/home/yarp-armarx/ArmarXYarpB
 
 $SCRIPT_PATH/startApplication.sh /home/SMBAD/paikan/home/yarp-armarx/ArmarXYarpBridge/build/bin/YarpHandUnitAppRun --Ice.Config=config/YarpHandUnitApp.cfg &
 
+$SCRIPT_PATH/startApplication.sh /home/SMBAD/paikan/home/yarp-armarx/ArmarXYarpBridge/build/bin/YarpPlatformUnitAppRun --Ice.Config=config/YarpPlatformUnitApp.cfg &
+

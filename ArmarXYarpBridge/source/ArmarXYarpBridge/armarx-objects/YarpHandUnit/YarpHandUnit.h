@@ -47,10 +47,9 @@ namespace armarx
         {
             defineOptionalProperty<std::string>("Robot", std::string("icub"), "Robot name");
             defineRequiredProperty<std::string>("YarpRobotPart", "Name of the robotpart");
-
-            //defineRequiredProperty<std::string>("PropertyName", "Description");
-            //defineOptionalProperty<std::string>("PropertyName", "DefaultValue", "Description");
-//            defineOptionalProperty<std::string>("Parts", "left_arm:Left Arm;right_arm:Right Arm", "List of robot part names (icubName:SimoxRobotNodeSetName)");
+            defineOptionalProperty<double>("EndeffectorVelocity", 10.f, "The velocity of the joints in the endeffector")
+                                  .setMin(1.f)
+                                  .setMax(100.f);
         }
     };
 
