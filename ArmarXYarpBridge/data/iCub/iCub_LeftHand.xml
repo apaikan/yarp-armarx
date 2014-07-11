@@ -318,7 +318,7 @@
 	<RobotNode name="Left Hand Ring Joint1">
 		<Joint type="revolute">
 			<!--DH a="14.8" d="0" theta="0" alpha="90" units="degree"/-->
-			<Limits unit="degree" lo="-25" hi="25"/>
+			<Limits unit="degree" lo="-60" hi="0"/>
                         <PropagateJointValue name="Left Hand Index Joint1" factor="-1"/>
                         <PropagateJointValue name="Left Hand Pinky Joint1" factor="1"/>
 

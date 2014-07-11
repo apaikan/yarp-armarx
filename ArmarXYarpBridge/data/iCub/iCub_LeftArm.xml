@@ -177,8 +177,8 @@
                 <Node name="Left Arm Wrist2"/>
 
                 <Node name="Left Hand Ring Joint1"/>
-                <Node name="Left Hand Thumb Joint2"/>
                 <Node name="Left Hand Thumb Joint1"/>
+                <Node name="Left Hand Thumb Joint2"/>
                 <Node name="Left Hand Thumb Joint3"/>
                 <Node name="Left Hand Index Joint2"/>
                 <Node name="Left Hand Index Joint3"/>

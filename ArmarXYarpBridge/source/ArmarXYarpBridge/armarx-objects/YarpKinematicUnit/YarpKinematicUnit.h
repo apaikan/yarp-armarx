@@ -51,7 +51,7 @@ namespace armarx
             KinematicUnitPropertyDefinitions(prefix)
         {
             defineOptionalProperty<std::string>("Robot", std::string("icub"), "Robot name");
-            defineOptionalProperty<std::string>("Parts", "left_arm:Left Arm;right_arm:Right Arm;head:Head;torso:Hip;left_leg:Left Leg;right_leg:Right Leg", "List of robot part names (icubName:SimoxRobotNodeSetName)");
+            defineOptionalProperty<std::string>("Parts", "left_arm:Left ArmWithHand;right_arm:Right ArmWithHand;head:Head;torso:Hip;left_leg:Left Leg;right_leg:Right Leg", "List of robot part names (icubName:SimoxRobotNodeSetName)");
             //defineOptionalProperty<std::string>("device", "remote_controlboard", "");
         }
     };
