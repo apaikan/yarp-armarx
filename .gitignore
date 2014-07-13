@@ -24,4 +24,5 @@
 *.app
 
 build
+.svn
 

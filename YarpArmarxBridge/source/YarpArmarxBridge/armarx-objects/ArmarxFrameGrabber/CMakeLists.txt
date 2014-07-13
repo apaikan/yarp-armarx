@@ -1,5 +1,4 @@
-
-armarx_component_set_name(YarpImageProvider)
+armarx_component_set_name("ArmarxFrameGrabber")
 
 find_package(IVT QUIET)
 armarx_build_if(IVT_FOUND "ivt library not found")
@@ -8,8 +7,7 @@ if(IVT_FOUND)
 endif()
 
 set(COMPONENT_LIBS ${IVT_LIBRARIES} ${Boost_LIBRARIES}  ${YARP_LIBRARIES})
-#VisionXInterfaces VisionXCore VisionXTools 
-set(SOURCES YarpImageProvider.cpp)
-set(HEADERS YarpImageProvider.h)
-armarx_add_component("${SOURCES}" "${HEADERS}")
 
+set(SOURCES ArmarxFrameGrabber.cpp)
+set(HEADERS ArmarxFrameGrabber.h)
+armarx_add_component("${SOURCES}" "${HEADERS}")
