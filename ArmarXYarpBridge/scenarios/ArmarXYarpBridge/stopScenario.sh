@@ -19,3 +19,11 @@ skill ()
 
 echo SENDING ${KILL_SIGNAL} TO ALL PROCESSES
 
+skill YarpKinematicUnitAppRun ${KILL_SIGNAL}
+
+skill YarpImageProviderAppRun ${KILL_SIGNAL}
+
+skill YarpHandUnitAppRun ${KILL_SIGNAL}
+
+skill YarpPlatformUnitAppRun ${KILL_SIGNAL}
+
