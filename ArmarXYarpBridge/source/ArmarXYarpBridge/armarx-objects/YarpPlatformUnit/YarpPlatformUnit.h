@@ -38,11 +38,11 @@ namespace armarx
      * @ingroup Components
      */
     class YarpPlatformUnitPropertyDefinitions:
-        public ComponentPropertyDefinitions
+        public PlatformUnitPropertyDefinitions
     {
     public:
         YarpPlatformUnitPropertyDefinitions(std::string prefix):
-            ComponentPropertyDefinitions(prefix)
+            PlatformUnitPropertyDefinitions(prefix)
         {
             //defineRequiredProperty<std::string>("PropertyName", "Description");
             //defineOptionalProperty<std::string>("PropertyName", "DefaultValue", "Description");

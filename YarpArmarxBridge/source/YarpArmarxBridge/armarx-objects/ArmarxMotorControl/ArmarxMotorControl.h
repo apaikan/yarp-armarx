@@ -25,10 +25,29 @@
 #define _ARMARX_MANAGEDICEOBJECT_YarpArmarxBridge_ArmarxMotorControl_H
 
 
-#include <Core/core/ManagedIceObject.h>
+#include <Core/core/Component.h>
 
 namespace armarx
 {
+    /**
+     * @class ArmarxMotorControlPropertyDefinitions
+     * @brief
+     * @ingroup Components
+     */
+    class ArmarxMotorControlPropertyDefinitions:
+        public ComponentPropertyDefinitions
+    {
+    public:
+        ArmarxMotorControlPropertyDefinitions(std::string prefix):
+            ComponentPropertyDefinitions(prefix)
+        {
+            defineOptionalProperty<std::string>("Robot", std::string("icub"), "Robot name");
+            defineOptionalProperty<std::string>("Parts", "left_arm:Left ArmWithHand;right_arm:Right ArmWithHand;head:Head;torso:Hip;left_leg:Left Leg;right_leg:Right Leg", "List of robot part names (icubName:SimoxRobotNodeSetName)");
+            //defineOptionalProperty<std::string>("device", "remote_controlboard", "");
+        }
+    };
+
+
     /**
      * @class ArmarxMotorControl
      * @brief A brief description
@@ -36,7 +55,7 @@ namespace armarx
      * Detailed Description
      */
     class ArmarxMotorControl :
-        virtual public armarx::ManagedIceObject
+        virtual public armarx::Component
     {
     public:
         /**
@@ -48,6 +67,12 @@ namespace armarx
         }
 
     protected:
+
+        /**
+         * @see PropertyUser::createPropertyDefinitions()
+         */
+        virtual PropertyDefinitionsPtr createPropertyDefinitions();
+
         /**
          * @see armarx::ManagedIceObject::onInitComponent()
          */

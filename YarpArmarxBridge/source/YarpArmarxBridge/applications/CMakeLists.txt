@@ -1,3 +1,4 @@
 
 
 add_subdirectory(ArmarxFrameGrabber)
+add_subdirectory(ArmarxMotorControl)

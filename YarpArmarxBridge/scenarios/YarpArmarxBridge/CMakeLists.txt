@@ -7,6 +7,7 @@
 
 set(SCENARIO_COMPONENTS
     ArmarxFrameGrabberApp
+    ArmarxMotorControlApp
     )
 
 # optional 3rd parameter: "path/to/global/config.cfg"

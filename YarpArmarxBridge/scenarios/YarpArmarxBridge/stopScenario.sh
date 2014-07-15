@@ -21,3 +21,5 @@ echo SENDING ${KILL_SIGNAL} TO ALL PROCESSES
 
 skill ArmarxFrameGrabberAppRun ${KILL_SIGNAL}
 
+skill ArmarxMotorControlAppRun ${KILL_SIGNAL}
+

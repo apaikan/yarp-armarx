@@ -14,43 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package    YarpArmarxBridge::ArmarXObjects::ArmarxMotorControl
- * @author     Ali Paikan ( ali dot paikan at gmail dot com )
+ * @package    YarpArmarxBridge::application::ArmarxMotorControl
+ * @author     Ali Paikan ( ali dot paikan at iit dot it )
  * @date       2014
  * @copyright  http://www.gnu.org/licenses/gpl.txt
  *             GNU General Public License
  */
 
-#include "ArmarxMotorControl.h"
+#include "ArmarxMotorControlApp.h"
+#include <Core/core/logging/Logging.h>
 
-
-using namespace armarx;
-
-PropertyDefinitionsPtr ArmarxMotorControl::createPropertyDefinitions()
+int main(int argc, char* argv[])
 {
-    return PropertyDefinitionsPtr(new ComponentPropertyDefinitions(
-                                      getConfigIdentifier()));
-}
+    armarx::ApplicationPtr app = armarx::Application::createInstance < armarx::ArmarxMotorControlApp > ();
+    app->setName("ArmarxMotorControl");
 
-
-void ArmarxMotorControl::onInitComponent()
-{
-}
-
-
-void ArmarxMotorControl::onConnectComponent()
-{
-
-}
-
-
-void ArmarxMotorControl::onDisconnectComponent()
-{
-
-}
-
-
-void ArmarxMotorControl::onExitComponent()
-{
-
+    return app->main(argc, argv);
 }
