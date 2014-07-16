@@ -9,8 +9,8 @@ endif()
 
 set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ${YARP_LIBRARIES} icubmod)
 
-set(SOURCES ArmarxMotorControl.cpp)
-set(HEADERS ArmarxMotorControl.h)
+set(SOURCES ArmarxMotorControl.cpp YarpMotorControlHelper.cpp)
+set(HEADERS ArmarxMotorControl.h YarpMotorControlHelper.h)
 
 armarx_add_component("${SOURCES}" "${HEADERS}")
 

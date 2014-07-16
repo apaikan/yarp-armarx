@@ -22,9 +22,11 @@
  */
 
 #include "ArmarxMotorControl.h"
-
+#include "YarpMotorControlHelper.h"
 
 using namespace armarx;
+using namespace yarp::os;
+using namespace yarp::dev;
 
 PropertyDefinitionsPtr ArmarxMotorControl::createPropertyDefinitions()
 {
@@ -32,9 +34,13 @@ PropertyDefinitionsPtr ArmarxMotorControl::createPropertyDefinitions()
                                       getConfigIdentifier()));
 }
 
-
 void ArmarxMotorControl::onInitComponent()
 {
+    ARMARX_IMPORTANT<<"onInitComponent";
+
+    Drivers::factory().add(new DriverCreatorOf<YarpMotorControlHelper>("armarxcontrol", 
+        "controlboard",
+        "ArmarxControl"));
 }
 
 
@@ -54,3 +60,5 @@ void ArmarxMotorControl::onExitComponent()
 {
 
 }
+
+

@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  * @package    YarpArmarxBridge::ArmarXObjects::ArmarxMotorControl
- * @author     Ali Paikan ( ali dot paikan at gmail dot com )
+ * @author     Ali Paikan ( ali dot paikan at iit dot com )
  * @date       2014
  * @copyright  http://www.gnu.org/licenses/gpl.txt
  *             GNU General Public License
@@ -26,6 +26,7 @@
 
 
 #include <Core/core/Component.h>
+#include "YarpMotorControlHelper.h"
 
 namespace armarx
 {
