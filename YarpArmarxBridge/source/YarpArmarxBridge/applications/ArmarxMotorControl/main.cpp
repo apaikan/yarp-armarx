@@ -23,9 +23,12 @@
 
 #include "ArmarxMotorControlApp.h"
 #include <Core/core/logging/Logging.h>
+#include <yarp/os/Network.h>
 
 int main(int argc, char* argv[])
 {
+    yarp::os::Network yarp;
+
     armarx::ApplicationPtr app = armarx::Application::createInstance < armarx::ArmarxMotorControlApp > ();
     app->setName("ArmarxMotorControl");
 

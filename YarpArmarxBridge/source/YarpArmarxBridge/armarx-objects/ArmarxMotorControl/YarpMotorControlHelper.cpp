@@ -32,7 +32,6 @@ using namespace yarp::dev;
 YarpMotorControlHelper::YarpMotorControlHelper() : 
     ImplementPositionControl<YarpMotorControlHelper, IPositionControl>(this)
 {
-    printf("\n\nin YarpMotorControlHelper()\n\n");
 }
 
 YarpMotorControlHelper::~YarpMotorControlHelper()
@@ -40,14 +39,27 @@ YarpMotorControlHelper::~YarpMotorControlHelper()
 
 }
 
+void YarpMotorControlHelper::setKinematicUnitInterface(const KinematicUnitInterfacePrx prx)
+{
+    kinematicUnitInterfacePrx = prx;
+}
+
+
 bool YarpMotorControlHelper::open(yarp::os::Searchable& config)
 {
-    printf("\n\nin open()\n\n");
-    int njoints = 10;
+
+    //printf("YarpMotorControlHelper::open() : %s\n", config.toString().c_str());
+    int njoints = config.find("joints_number").asInt();
     axisMap = allocAndCheck<int>(njoints);
     angleToEncoder = allocAndCheck<double>(njoints);
     zeros = allocAndCheck<double>(njoints);
-
+    for(int i=0; i<njoints; i++)
+    {
+        axisMap[i] = i;                     // joints are ordered incrementally 
+        zeros[i] = 0.0;                     // all the joint default value set to zero
+        angleToEncoder[i] = 180.0/M_PI;     // radian to degree
+    }        
+    
     ImplementPositionControl<YarpMotorControlHelper, IPositionControl>::
         initialize(njoints, axisMap, angleToEncoder, zeros);
 }
@@ -62,8 +74,8 @@ bool YarpMotorControlHelper::close(void)
 
 bool YarpMotorControlHelper::getAxes(int *ax) { }
 bool YarpMotorControlHelper::setPositionModeRaw() { }
-bool YarpMotorControlHelper::positionMoveRaw(int j, double ref) { }
-bool YarpMotorControlHelper::positionMoveRaw(const double *refs) { }
+bool YarpMotorControlHelper::positionMoveRaw(int j, double ref) { printf("positionMoveRaw\n");}
+bool YarpMotorControlHelper::positionMoveRaw(const double *refs) { printf("positionMoveRaw(doubles)\n");}
 bool YarpMotorControlHelper::relativeMoveRaw(int j, double delta) { }
 bool YarpMotorControlHelper::relativeMoveRaw(const double *deltas) { }
 bool YarpMotorControlHelper::checkMotionDoneRaw(bool *flag) { }

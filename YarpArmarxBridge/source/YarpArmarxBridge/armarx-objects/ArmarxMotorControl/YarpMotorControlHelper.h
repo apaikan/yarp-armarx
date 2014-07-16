@@ -29,6 +29,8 @@
 #include <yarp/dev/ControlBoardInterfaces.h>
 #include <yarp/dev/ControlBoardInterfacesImpl.h>
 
+#include <Core/interface/units/KinematicUnitInterface.h>
+
 #include <map>
 
 namespace armarx
@@ -49,6 +51,11 @@ namespace armarx
         YarpMotorControlHelper();
         virtual ~YarpMotorControlHelper();
 
+        /*
+         * Set the proxy to the kinemantic unit
+         */
+         void setKinematicUnitInterface(const KinematicUnitInterfacePrx prx);
+        
         /*
          * Implelenting YARP device 
          */
@@ -79,13 +86,10 @@ namespace armarx
         virtual bool stopRaw();
 
     private:
+        KinematicUnitInterfacePrx kinematicUnitInterfacePrx;        // send commands to kinematic unit
         int* axisMap;
         double* angleToEncoder;
         double* zeros;
-
-        typedef std::map<std::string, yarp::dev::PolyDriver> DriverMap;
-        DriverMap m_partDrivers; 
-        yarp::dev::PolyDriver* createPart(const char *name);
     };
 }
 

@@ -26,6 +26,13 @@
 
 
 #include <Core/core/Component.h>
+#include <Core/interface/units/KinematicUnitInterface.h>
+
+/* VirtualRobot headers */
+#include <VirtualRobot/Robot.h>
+#include <VirtualRobot/Nodes/RobotNode.h>
+#include <VirtualRobot/RobotNodeSet.h>
+
 #include "YarpMotorControlHelper.h"
 
 namespace armarx
@@ -42,9 +49,9 @@ namespace armarx
         ArmarxMotorControlPropertyDefinitions(std::string prefix):
             ComponentPropertyDefinitions(prefix)
         {
-            defineOptionalProperty<std::string>("Robot", std::string("icub"), "Robot name");
+            defineOptionalProperty<std::string>("Robot", std::string("armarx"), "Robot name");
             defineOptionalProperty<std::string>("Parts", "left_arm:Left ArmWithHand;right_arm:Right ArmWithHand;head:Head;torso:Hip;left_leg:Left Leg;right_leg:Right Leg", "List of robot part names (icubName:SimoxRobotNodeSetName)");
-            //defineOptionalProperty<std::string>("device", "remote_controlboard", "");
+            defineRequiredProperty<std::string>("KinematicUnitName","Name of the KinematicUnit Proxy");
         }
     };
 
@@ -93,6 +100,20 @@ namespace armarx
          * @see armarx::ManagedIceObject::onExitComponent()
          */
         virtual void onExitComponent();
+
+    private:       
+        KinematicUnitInterfacePrx kinematicUnitInterfacePrx;        // send commands to kinematic unit
+
+        typedef std::map<std::string, yarp::dev::PolyDriver*> DriverMap;
+        DriverMap m_partDrivers; 
+        yarp::dev::PolyDriver* createPart(const char *name);
+
+        std::string robotName;
+        std::string robotParts;
+        std::string robotNodeSetName;
+
+        VirtualRobot::RobotPtr robot;
+        VirtualRobot::RobotNodeSetPtr robotNodeSet;
     };
 }
 
