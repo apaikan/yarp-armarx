@@ -4,7 +4,8 @@
 	
 	<RobotNode name="iCubRoot">
 		<Transform>
-			<Translation x="0" y="0" z="598"/>
+			<!-- <Translation x="0" y="0" z="598"/> -->
+			<Translation x="0" y="0" z="0"/>
 		</Transform>
 		<Visualization enable="true">
 			<CoordinateAxis  type="Inventor" enable="false" scaling="1"/>

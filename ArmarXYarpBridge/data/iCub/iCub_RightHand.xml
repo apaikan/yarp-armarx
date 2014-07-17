@@ -561,8 +561,8 @@
 	<!-- END EFFECTOR -->
 	<Endeffector name="Right Hand" base="Right Hand Init" tcp="Right Arm TCP" gcp="Right Arm GCP">
         <Preshape name="Open 1">
-            <Node name="Right Hand Index Joint2"  unit="degree" value="30"/>
-            <Node name="Right Hand Index Joint3"  unit="degree" value="10"/>
+            <Node name="Right Hand Index Joint2"  unit="degree" value="40"/>
+            <Node name="Right Hand Index Joint3"  unit="degree" value="85"/>
             <Node name="Right Hand Middle Joint2" unit="degree" value="10"/>
             <Node name="Right Hand Middle Joint3" unit="degree" value="10"/>
             <Node name="Right Hand Ring Joint1"   unit="degree" value="10"/>
