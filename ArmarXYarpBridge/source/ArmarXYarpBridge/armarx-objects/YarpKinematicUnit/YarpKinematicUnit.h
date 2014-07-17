@@ -52,6 +52,7 @@ namespace armarx
         {
             defineOptionalProperty<std::string>("Robot", std::string("icub"), "Robot name");
             defineOptionalProperty<std::string>("Parts", "left_arm:Left ArmWithHand;right_arm:Right ArmWithHand;head:Head;torso:Hip;left_leg:Left Leg;right_leg:Right Leg", "List of robot part names (icubName:SimoxRobotNodeSetName)");
+            defineOptionalProperty<int>("ReportCycleTime", 30, "CycleTime in ms of the sensor value reporting thread. Doesnot affect cycle time of icub.");
             //defineOptionalProperty<std::string>("device", "remote_controlboard", "");
         }
     };
@@ -95,7 +96,7 @@ namespace armarx
     public:
         void requestJoints(const StringSequence &, const Ice::Current &);
         void releaseJoints(const StringSequence &, const Ice::Current &);
-        void switchControlMode(const NameControlModeMap &, const Ice::Current &);
+        void switchControlMode(const NameControlModeMap &controlModes, const Ice::Current &);
         void setJointAngles(const NameValueMap &, const Ice::Current &);
         void setJointVelocities(const NameValueMap &, const Ice::Current &);
         void setJointTorques(const NameValueMap &, const Ice::Current &);
@@ -105,11 +106,13 @@ namespace armarx
         // yarp related properties 
     private: 
         void report();
+        void reportJointVelocities();
         typedef std::map<std::string, YarpMotorInterfaceHelper*> InterfaceMap;
         InterfaceMap   yarpMotorInterfaces;
         typedef std::map<std::string, std::pair<std::string, int> > NameIndexMap;
         NameIndexMap nameIndexMap;
-
+        std::map<std::string, ControlMode> controlModes;
+        Mutex dataMutex;
 
         PeriodicTask<YarpKinematicUnit>::pointer_type task;
     };

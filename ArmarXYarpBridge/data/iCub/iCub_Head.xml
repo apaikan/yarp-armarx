@@ -60,6 +60,18 @@
 		</Joint>
 		<Child name="EyeLeft1"/>
 		<Child name="EyeRight1"/>
+		<Child name="VirtualCentralGaze"/>
+	</RobotNode>
+
+
+    <RobotNode name="VirtualCentralGaze">
+        <Joint type="prismatic">
+            <TranslationDirection x="1" y="0" z="0"/>
+            <Limits unit="mm" lo="0" hi="10000"/>
+        </Joint>
+ 		<Visualization enable="true">
+			<CoordinateAxis type="Inventor" enable="false" scaling="3"/>
+		</Visualization>
 	</RobotNode>
 	
 	
@@ -148,6 +160,14 @@
 		<Node name="EyeRight1"/>
 		<Node name="EyeRight2"/>
 	</RobotNodeSet>
+
+    <RobotNodeSet name="IKVirtualGaze" kinematicRoot="Neck1" tcp="VirtualCentralGaze">
+		<Node name="Neck2"/>
+		<Node name="Neck3"/>
+		<Node name="Neck1"/>
+		<Node name="VirtualCentralGaze"/>
+    </RobotNodeSet>
+
 	
 </Robot>
 	
