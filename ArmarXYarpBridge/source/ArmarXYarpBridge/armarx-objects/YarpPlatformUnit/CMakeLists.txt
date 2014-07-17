@@ -9,7 +9,13 @@ armarx_component_set_name("YarpPlatformUnit")
 #    include_directories(${MyLib_INCLUDE_DIRS})
 #endif()
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ArmarXCoreUnits)
+find_package(Simox QUIET)
+armarx_build_if(Simox_FOUND "Simox-VirtualRobot not available")
+if(Simox_FOUND)
+    include_directories(${Simox_INCLUDE_DIRS})
+endif()
+
+set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ArmarXCoreUnits ${Simox_LIBRARIES})
 
 set(SOURCES YarpPlatformUnit.cpp)
 set(HEADERS YarpPlatformUnit.h)
