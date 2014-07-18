@@ -50,12 +50,7 @@ namespace armarx
     public:
         YarpMotorControlHelper();
         virtual ~YarpMotorControlHelper();
-
-        /*
-         * Set the proxy to the kinemantic unit
-         */
-         void setKinematicUnitInterface(const KinematicUnitInterfacePrx prx);
-        
+       
         /*
          * Implelenting YARP device 
          */
@@ -86,7 +81,7 @@ namespace armarx
         virtual bool stopRaw();
 
     private:
-        KinematicUnitInterfacePrx kinematicUnitInterfacePrx;        // send commands to kinematic unit
+        KinematicUnitInterfacePrx kinUnitInterface;        // send commands to kinematic unit
         int* axisMap;
         double* angleToEncoder;
         double* zeros;
