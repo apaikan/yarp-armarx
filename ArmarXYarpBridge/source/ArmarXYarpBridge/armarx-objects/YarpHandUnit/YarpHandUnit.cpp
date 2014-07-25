@@ -124,13 +124,6 @@ void armarx::YarpHandUnit::onExitHandUnit()
 
 
 
-NameValueMap YarpHandUnit::getPreshapeJointValues(const std::string&preshapeName, const Ice::Current&)
-{
-    EndEffectorPtr efp = robot->getEndEffector(getProperty<std::string>("EndeffectorName").getValue());
-    RobotConfigPtr rc = efp->getPreshape(preshapeName);
-    return rc->getRobotNodeJointValueMap();
-}
-
 YarpHandUnit::PreshapeSequences YarpHandUnit::loadPreshapes(std::string endEffectorName)
 {
     PreshapeSequences eftSeq;

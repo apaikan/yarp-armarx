@@ -85,7 +85,6 @@ namespace armarx
         void open(const Ice::Current &);
         void close(const Ice::Current &);
         void preshape(const std::string &preshapeName, const Ice::Current &c=Ice::Current());
-        NameValueMap getPreshapeJointValues(const std::string&, const Ice::Current &c=Ice::Current());
 
         // HandUnit interface
     public:
