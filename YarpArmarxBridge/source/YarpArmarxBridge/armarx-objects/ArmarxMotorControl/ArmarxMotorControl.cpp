@@ -34,6 +34,8 @@ using namespace armarx;
 using namespace yarp::os;
 using namespace yarp::dev;
 
+KinematicUnitInterfacePrx ArmarxMotorControl::_kinematicUnitInterfacePrx = NULL;
+
 PropertyDefinitionsPtr ArmarxMotorControl::createPropertyDefinitions()
 {
     return PropertyDefinitionsPtr(new ArmarxMotorControlPropertyDefinitions(
@@ -48,6 +50,16 @@ void ArmarxMotorControl::onInitComponent()
     Drivers::factory().add(new DriverCreatorOf<YarpMotorControlHelper>("armarxcontrol", 
                            "controlboard",
                            "ArmarxMotorControl"));
+
+    usingProxy(getProperty<std::string>("KinematicUnitName").getValue());
+}
+
+
+void ArmarxMotorControl::onConnectComponent()
+{
+    // get proxy to send commands to the kinematic unit
+    std::string kinematicUnitInstructionChannel = getProperty<std::string>("KinematicUnitName").getValue();
+    _kinematicUnitInterfacePrx = getProxy<KinematicUnitInterfacePrx>(kinematicUnitInstructionChannel);
 
     std::vector<std::string> partPairs;
     boost::split(partPairs,
@@ -79,21 +91,14 @@ void ArmarxMotorControl::onInitComponent()
             */
         }
     }
-    usingProxy(getProperty<std::string>("KinematicUnitName").getValue());
-}
 
-
-void ArmarxMotorControl::onConnectComponent()
-{
-    // get proxy to send commands to the kinematic unit
-    std::string kinematicUnitInstructionChannel = getProperty<std::string>("KinematicUnitName").getValue();
-    kinematicUnitInterfacePrx = getProxy<KinematicUnitInterfacePrx>(kinematicUnitInstructionChannel);
-
+    /*
     for(DriverMap::const_iterator it = m_partDrivers.begin(); it != m_partDrivers.end(); ++it)
     {
-        YarpMotorControlHelper* ctrlHelper = dynamic_cast<YarpMotorControlHelper*>((it->second)->getImplementation());
+        //YarpMotorControlHelper* ctrlHelper = dynamic_cast<YarpMotorControlHelper*>((it->second)->getImplementation());
         //ctrlHelper->setKinematicUnitInterface(kinematicUnitInterfacePrx);
     }
+    */
 }
 
 
@@ -128,6 +133,7 @@ yarp::dev::PolyDriver* ArmarxMotorControl::createPart(const char *name)
 
     // make them to be taken from robot xml description
     options.put("joints_number", 10);
+    options.put("part_name", name);
 
     PolyDriver* driver = new yarp::dev::PolyDriver(options);
     if (!driver->isValid()){
@@ -160,4 +166,8 @@ VirtualRobot::RobotPtr ArmarxMotorControl::loadRobotFile(std::string fileName)
 }
 */
 
+KinematicUnitInterfacePrx ArmarxMotorControl::getKinematicUnitInterface(void) 
+{
+    return _kinematicUnitInterfacePrx;
+}
 

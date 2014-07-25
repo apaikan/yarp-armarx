@@ -21,6 +21,7 @@
  *             GNU General Public License
  */
 
+#include "ArmarxMotorControl.h"
 #include "YarpMotorControlHelper.h"
 #include <yarp/dev/ControlBoardInterfacesImpl.inl>
 
@@ -32,18 +33,13 @@ using namespace yarp::dev;
 YarpMotorControlHelper::YarpMotorControlHelper() : 
     ImplementPositionControl<YarpMotorControlHelper, IPositionControl>(this)
 {
+    kinUnitInterface = ArmarxMotorControl::getKinematicUnitInterface();
 }
 
 YarpMotorControlHelper::~YarpMotorControlHelper()
 {
 
 }
-
-void YarpMotorControlHelper::setKinematicUnitInterface(const KinematicUnitInterfacePrx prx)
-{
-    kinematicUnitInterfacePrx = prx;
-}
-
 
 bool YarpMotorControlHelper::open(yarp::os::Searchable& config)
 {

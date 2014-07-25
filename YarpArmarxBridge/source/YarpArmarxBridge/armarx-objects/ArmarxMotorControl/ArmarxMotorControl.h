@@ -74,6 +74,8 @@ namespace armarx
             return "ArmarxMotorControl";
         }
 
+        static KinematicUnitInterfacePrx getKinematicUnitInterface(void); 
+
     protected:
 
         /**
@@ -102,7 +104,7 @@ namespace armarx
         virtual void onExitComponent();
 
     private:       
-        KinematicUnitInterfacePrx kinematicUnitInterfacePrx;        // send commands to kinematic unit
+        static KinematicUnitInterfacePrx _kinematicUnitInterfacePrx;        // send commands to kinematic unit
 
         typedef std::map<std::string, yarp::dev::PolyDriver*> DriverMap;
         DriverMap m_partDrivers; 
