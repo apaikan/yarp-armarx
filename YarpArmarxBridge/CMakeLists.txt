@@ -20,7 +20,6 @@ depends_on_armarx_package(MemoryX)
 depends_on_armarx_package(VisionX)
 
 add_subdirectory(etc)
-#add_subdirectory(interface)
 add_subdirectory(source)
 
 install_project()
