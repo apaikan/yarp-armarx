@@ -22,7 +22,6 @@ armarx_project("ArmarXYarpBridge")
 # depends_on_armarx_package(ArmarXGui)
 
 add_subdirectory(etc)
-#add_subdirectory(interface)
 add_subdirectory(source)
 
 install_project()
