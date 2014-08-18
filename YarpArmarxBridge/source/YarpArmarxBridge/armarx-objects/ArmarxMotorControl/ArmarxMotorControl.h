@@ -25,8 +25,9 @@
 #define _ARMARX_MANAGEDICEOBJECT_YarpArmarxBridge_ArmarxMotorControl_H
 
 
+#include <RobotAPI/interface/units/KinematicUnitInterface.h>
+
 #include <Core/core/Component.h>
-#include <Core/interface/units/KinematicUnitInterface.h>
 
 /* VirtualRobot headers */
 #include <VirtualRobot/Robot.h>

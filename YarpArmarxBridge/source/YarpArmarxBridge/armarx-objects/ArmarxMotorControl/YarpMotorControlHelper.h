@@ -29,7 +29,7 @@
 #include <yarp/dev/ControlBoardInterfaces.h>
 #include <yarp/dev/ControlBoardInterfacesImpl.h>
 
-#include <Core/interface/units/KinematicUnitInterface.h>
+#include <RobotAPI/interface/units/KinematicUnitInterface.h>
 
 #include <map>
 
