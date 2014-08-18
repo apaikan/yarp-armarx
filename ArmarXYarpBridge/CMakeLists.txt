@@ -13,6 +13,7 @@ find_package(ICUB REQUIRED)
 include(${ArmarXCore_USE_FILE})
 
 # Name for the project
+depends_on_armarx_package(RobotAPI)
 depends_on_armarx_package(MemoryX)
 depends_on_armarx_package(VisionX)
 

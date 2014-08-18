@@ -25,16 +25,13 @@
 #ifndef _ARMARX_COMPONENT_ArmarXYarpBridge_YarpKinematicUnit_H
 #define _ARMARX_COMPONENT_ArmarXYarpBridge_YarpKinematicUnit_H
 
+#include "YarpMotorInterfaceHelper.h"
+
+#include <RobotAPI/interface/units/KinematicUnitInterface.h>
+#include <RobotAPI/units/KinematicUnit.h>
 
 #include <Core/core/Component.h>
 #include <Core/core/services/tasks/PeriodicTask.h>
-
-#include <Core/interface/units/KinematicUnitInterface.h>
-
-#include <Core/units/KinematicUnit.h>
-
-#include "YarpMotorInterfaceHelper.h"
-
 
 namespace armarx
 {

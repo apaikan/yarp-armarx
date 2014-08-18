@@ -27,9 +27,9 @@
 
 
 #include <ArmarXYarpBridge/armarx-objects/YarpKinematicUnit/YarpMotorInterfaceHelper.h>
+#include <RobotAPI/units/HandUnit.h>
 #include <Core/core/Component.h>
 #include <Core/core/services/tasks/RunningTask.h>
-#include <Core/units/HandUnit.h>
 
 namespace armarx
 {
