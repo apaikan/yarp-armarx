@@ -25,10 +25,10 @@
 #define _ARMARX_COMPONENT_ArmarXYarpBridge_YarpPlatformUnit_H
 
 
+#include <RobotAPI/units/PlatformUnit.h>
+
 #include <Core/core/Component.h>
 #include <Core/core/services/tasks/PeriodicTask.h>
-
-#include <Core/units/PlatformUnit.h>
 
 namespace armarx
 {

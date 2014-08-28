@@ -13,6 +13,7 @@ find_package(ICUB REQUIRED)
 include(${ArmarXCore_USE_FILE})
 
 # Name for the project
+depends_on_armarx_package(RobotAPI)
 depends_on_armarx_package(MemoryX)
 depends_on_armarx_package(VisionX)
 
@@ -22,7 +23,6 @@ armarx_project("ArmarXYarpBridge")
 # depends_on_armarx_package(ArmarXGui)
 
 add_subdirectory(etc)
-#add_subdirectory(interface)
 add_subdirectory(source)
 
 install_project()
