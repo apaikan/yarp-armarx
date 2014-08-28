@@ -9,7 +9,7 @@ armarx_component_set_name("YarpPlatformUnitApp")
 #    include_directories(${MyLib_INCLUDE_DIRS})
 #endif()
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore YarpPlatformUnit ArmarXCoreUnits)
+set(COMPONENT_LIBS YarpPlatformUnit )
 
 set(EXE_SOURCE main.cpp)
 

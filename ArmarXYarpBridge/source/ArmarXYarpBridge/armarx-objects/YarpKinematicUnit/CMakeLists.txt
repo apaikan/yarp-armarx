@@ -26,7 +26,7 @@ if(ICUB_FOUND)
     include_directories(${ICUB_INCLUDE_DIRS})
 endif()
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ArmarXCoreUnits YarpKinematicUnit ${YARP_LIBRARIES} icubmod ${Simox_LIBRARIES})
+set(COMPONENT_LIBS RobotAPIInterfaces ArmarXInterfaces ArmarXCore RobotAPIUnits ${YARP_LIBRARIES} icubmod ${Simox_LIBRARIES})
 
 set(SOURCES YarpKinematicUnit.cpp YarpMotorInterfaceHelper.cpp)
 set(HEADERS YarpKinematicUnit.h YarpMotorInterfaceHelper.h)

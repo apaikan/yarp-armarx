@@ -15,7 +15,7 @@ if(Simox_FOUND)
     include_directories(${Simox_INCLUDE_DIRS})
 endif()
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ArmarXCoreUnits ${Simox_LIBRARIES})
+set(COMPONENT_LIBS RobotAPIInterfaces RobotAPIUnits ${Simox_LIBRARIES})
 
 set(SOURCES YarpPlatformUnit.cpp)
 set(HEADERS YarpPlatformUnit.h)

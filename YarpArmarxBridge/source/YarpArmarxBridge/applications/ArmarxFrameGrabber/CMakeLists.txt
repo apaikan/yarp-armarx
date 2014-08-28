@@ -6,8 +6,8 @@ if(IVT_FOUND)
     include_directories(${IVT_INCLUDE_DIRS})
 endif()
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ArmarxFrameGrabber VisionXInterfaces VisionXCore ${IVT_LIBRARIES}  ${YARP_LIBRARIES} )
-
+set(COMPONENT_LIBS ArmarxFrameGrabber  )
+#${IVT_LIBRARIES}  ${YARP_LIBRARIES}
 set(EXE_SOURCE main.cpp)
 
 armarx_add_component_executable("${EXE_SOURCE}")

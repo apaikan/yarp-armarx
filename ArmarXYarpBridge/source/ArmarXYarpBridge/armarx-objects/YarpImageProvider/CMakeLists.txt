@@ -7,7 +7,7 @@ if(IVT_FOUND)
     include_directories(${IVT_INCLUDE_DIRS})
 endif()
 
-set(COMPONENT_LIBS ${IVT_LIBRARIES} ${Boost_LIBRARIES}  ${YARP_LIBRARIES})
+set(COMPONENT_LIBS  VisionXCore ${IVT_LIBRARIES} ${Boost_LIBRARIES}  ${YARP_LIBRARIES})
 #VisionXInterfaces VisionXCore VisionXTools 
 set(SOURCES YarpImageProvider.cpp)
 set(HEADERS YarpImageProvider.h)

@@ -6,7 +6,7 @@ if(IVT_FOUND)
     include_directories(${IVT_INCLUDE_DIRS})
 endif()
 
-set(COMPONENT_LIBS ${IVT_LIBRARIES} ${Boost_LIBRARIES}  ${YARP_LIBRARIES})
+set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore VisionXInterfaces VisionXCore ${IVT_LIBRARIES} ${Boost_LIBRARIES}  ${YARP_LIBRARIES})
 
 set(SOURCES ArmarxFrameGrabber.cpp)
 set(HEADERS ArmarxFrameGrabber.h)

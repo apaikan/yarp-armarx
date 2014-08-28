@@ -7,7 +7,7 @@ fi
 
 skill ()
 {
-    EXECUTABLE_STR=`ps aux | grep "$1 \-\-Ice.Default" | grep -v grep | awk '{print $2}'`
+    EXECUTABLE_STR=`ps aux | grep "$1" | grep -v grep | awk '{print $2}'`
     if [ ${#EXECUTABLE_STR} == 0 ]
     then
         echo skipping $1

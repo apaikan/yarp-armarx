@@ -29,7 +29,7 @@ endif()
 
 
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ArmarXCoreUnits YarpKinematicUnit ${YARP_LIBRARIES} icubmod ${Simox_LIBRARIES})
+set(COMPONENT_LIBS YarpKinematicUnit)
 
 set(EXE_SOURCE main.cpp)
 

@@ -18,7 +18,7 @@ if(IVT_FOUND)
     include_directories(${IVT_INCLUDE_DIRS})
 endif()
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore YarpImageProvider VisionXInterfaces VisionXCore ${IVT_LIBRARIES}  ${YARP_LIBRARIES} )
+set(COMPONENT_LIBS YarpImageProvider )
 
 set(EXE_SOURCE main.cpp)
 

@@ -19,7 +19,7 @@ if(ICUB_FOUND)
 endif()
 
 
-set(COMPONENT_LIBS ArmarXInterfaces ArmarXCore ArmarxMotorControl ${Simox_LIBRARIES} ${YARP_LIBRARIES} icubmod)
+set(COMPONENT_LIBS  ArmarxMotorControl)
 
 set(EXE_SOURCE main.cpp)
 
